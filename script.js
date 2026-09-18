@@ -1,0 +1,1934 @@
+
+/* ====================================================
+   ARMAS E ARMADURAS
+   ==================================================== */
+const ARMAS = {
+  adaga: { icone: "🗡️", nome: "Adaga", tipo: "arma", raridade: "comum", dano: 8, desc: "Rápida e silenciosa.", pixel: "dagger" },
+  espada_curta: { icone: "⚔️", nome: "Espada Curta", tipo: "arma", raridade: "comum", dano: 10, desc: "Uma espada equilibrada.", pixel: "sword_short" },
+  espada_longa: { icone: "⚔️", nome: "Espada Longa", tipo: "arma", raridade: "incomum", dano: 16, desc: "Símbolo do guerreiro.", pixel: "sword_long" },
+  espada_larga: { icone: "⚔️", nome: "Espada Larga", tipo: "arma", raridade: "raro", dano: 22, desc: "Lâmina pesada.", pixel: "sword_broad" },
+  florete: { icone: "🗡️", nome: "Florete", tipo: "arma", raridade: "incomum", dano: 14, desc: "Precisão e elegância.", pixel: "rapier" },
+  sabre: { icone: "🗡️", nome: "Sabre", tipo: "arma", raridade: "raro", dano: 20, desc: "Corte rápido.", pixel: "saber" },
+  katana: { icone: "⚔️", nome: "Katana", tipo: "arma", raridade: "epico", dano: 30, desc: "A lâmina do samurai.", pixel: "katana" },
+  machado_batalha: { icone: "🪓", nome: "Machado de Batalha", tipo: "arma", raridade: "raro", dano: 26, desc: "Corta árvores!", pixel: "axe", cortaArvore: true },
+  estilete: { icone: "🗡️", nome: "Estilete", tipo: "arma", raridade: "incomum", dano: 12, desc: "Perfura armaduras.", pixel: "stiletto" },
+  foice_sombria: { icone: "🌙", nome: "Foice Sombria", tipo: "arma", raridade: "lendario", dano: 45, desc: "Rouba almas.", pixel: "scythe" },
+  espada_fogo: { icone: "🔥", nome: "Espada Flamejante", tipo: "arma", raridade: "epico", dano: 32, desc: "Arde em chamas.", pixel: "sword_fire" },
+  espada_gelo: { icone: "❄️", nome: "Lâmina de Gelo", tipo: "arma", raridade: "epico", dano: 30, desc: "Congela.", pixel: "sword_ice" },
+  espada_veneno: { icone: "☠️", nome: "Lâmina Venenosa", tipo: "arma", raridade: "epico", dano: 28, desc: "Envenena.", pixel: "sword_poison" },
+  espada_trovao: { icone: "⚡", nome: "Espada do Trovão", tipo: "arma", raridade: "lendario", dano: 42, desc: "Raios.", pixel: "sword_thunder" },
+  espada_sagrada: { icone: "✨", nome: "Lâmina Sagrada", tipo: "arma", raridade: "lendario", dano: 40, desc: "Brilha.", pixel: "sword_holy" },
+  espada_sombria: { icone: "🌑", nome: "Espada Sombria", tipo: "arma", raridade: "lendario", dano: 44, desc: "Drena vida.", pixel: "sword_dark" },
+  excalibur: { icone: "👑", nome: "Excalibur", tipo: "arma", raridade: "mitico", dano: 60, desc: "A espada lendária.", pixel: "excalibur" },
+  arco_simples: { icone: "🏹", nome: "Arco Simples", tipo: "arma", raridade: "comum", dano: 10, desc: "Um arco de caça.", pixel: "bow" },
+  arco_longo: { icone: "🏹", nome: "Arco Longo", tipo: "arma", raridade: "incomum", dano: 15, desc: "Alcance maior.", pixel: "longbow" },
+  arco_elfico: { icone: "🏹", nome: "Arco Élfico", tipo: "arma", raridade: "epico", dano: 28, desc: "Precisão perfeita.", pixel: "elven_bow" },
+  lanca: { icone: "🔱", nome: "Lança Longa", tipo: "arma", raridade: "incomum", dano: 14, desc: "Alcance.", pixel: "spear" },
+  alabarda: { icone: "⚔️", nome: "Alabarda", tipo: "arma", raridade: "raro", dano: 24, desc: "Machado e lança.", pixel: "halberd" },
+  tridente: { icone: "🔱", nome: "Tridente", tipo: "arma", raridade: "raro", dano: 26, desc: "A arma do mar.", pixel: "trident" },
+  machado_lenhador: { icone: "🪓", nome: "Machado Lenhador", tipo: "arma", raridade: "incomum", dano: 14, desc: "Ideal para cortar árvores.", pixel: "axe", cortaArvore: true, bonusMadeira: 2 },
+  armadura_couro: { icone: "🛡️", nome: "Armadura de Couro", tipo: "armadura", raridade: "comum", defesa: 5, desc: "Proteção leve.", pixel: "armor_leather" },
+  armadura_ferro: { icone: "🛡️", nome: "Armadura de Ferro", tipo: "armadura", raridade: "incomum", defesa: 10, desc: "Sólida.", pixel: "armor_iron" },
+  armadura_aco: { icone: "🛡️", nome: "Armadura de Aço", tipo: "armadura", raridade: "raro", defesa: 18, desc: "Resistente.", pixel: "armor_steel" },
+  armadura_ouro: { icone: "🛡️", nome: "Armadura Dourada", tipo: "armadura", raridade: "epico", defesa: 25, desc: "Realeza.", pixel: "armor_gold" },
+  armadura_mithril: { icone: "🛡️", nome: "Armadura de Mithril", tipo: "armadura", raridade: "lendario", defesa: 40, desc: "Leve como pluma.", pixel: "armor_mithril" },
+  armadura_dragao: { icone: "🛡️", nome: "Armadura do Dragão", tipo: "armadura", raridade: "mitico", defesa: 60, desc: "Escamas de dragão.", pixel: "armor_dragon" },
+  manto_mago: { icone: "🧙", nome: "Manto do Mago", tipo: "armadura", raridade: "epico", defesa: 20, desc: "Brilha com magia.", pixel: "robe_mage" },
+  manto_lunar: { icone: "🌙", nome: "Manto Lunar", tipo: "armadura", raridade: "lendario", defesa: 35, desc: "Brilha sob a lua.", pixel: "robe_lunar" },
+  elmo_couro: { icone: "⛑️", nome: "Elmo de Couro", tipo: "elmo", raridade: "comum", defesa: 3, desc: "Proteção básica.", pixel: "helmet_leather" },
+  elmo_ferro: { icone: "⛑️", nome: "Elmo de Ferro", tipo: "elmo", raridade: "incomum", defesa: 6, desc: "Cobre a cabeça.", pixel: "helmet_iron" },
+  elmo_cavaleiro: { icone: "⛑️", nome: "Elmo do Cavaleiro", tipo: "elmo", raridade: "raro", defesa: 12, desc: "Aço polido.", pixel: "helmet_knight" },
+  elmo_viking: { icone: "⛑️", nome: "Elmo Viking", tipo: "elmo", raridade: "epico", defesa: 18, desc: "Com chifres.", pixel: "helmet_viking" },
+  coroa_real: { icone: "👑", nome: "Coroa Real", tipo: "elmo", raridade: "lendario", defesa: 25, desc: "A coroa do rei.", pixel: "crown" }
+};
+const CONSUMIVEIS = {
+  pocao_hp_pequena: { icone: "💊", nome: "Poção HP Pequena", tipo: "consumivel", raridade: "comum", efeito: "hp", valor: 30, desc: "Recupera 30 HP." },
+  pocao_hp_media: { icone: "💚", nome: "Poção HP Média", tipo: "consumivel", raridade: "incomum", efeito: "hp", valor: 60, desc: "Recupera 60 HP." },
+  pocao_mp_pequena: { icone: "🧪", nome: "Poção MP Pequena", tipo: "consumivel", raridade: "comum", efeito: "mp", valor: 20, desc: "Recupera 20 MP." },
+  elixir_xp: { icone: "⭐", nome: "Elixir de XP", tipo: "consumivel", raridade: "epico", efeito: "xp", valor: 200, desc: "Ganha 200 XP." }
+};
+const MATERIAIS = {
+  madeira: { icone: "🪵", nome: "Madeira", tipo: "material", raridade: "comum", desc: "Madeira bruta." },
+  chave: { icone: "🔑", nome: "Chave", tipo: "material", raridade: "raro", desc: "Abre baús." }
+};
+const CHAVES_POR_BAU = { comum: 1, raro: 2, epico: 3, lendario: 5 };
+const RARIDADES = {
+  comum: { nome: "Comum", cor: "#9ca3af" },
+  incomum: { nome: "Incomum", cor: "#10b981" },
+  raro: { nome: "Raro", cor: "#3b82f6" },
+  epico: { nome: "Épico", cor: "#8b5cf6" },
+  lendario: { nome: "Lendário", cor: "#fbbf24" },
+  mitico: { nome: "Mítico", cor: "#dc2626" }
+};
+const herois = {
+  rayato: { nome: "Rayato", classe: "Assassino", cor: "#a78bfa", corGlow: "rgba(167,139,250,0.6)", corBg1: "#2e1065", corBg2: "#0f0f1a", hp: 120, mp: 80, forca: 14, agilidade: 22,
+    aparencia: { pele: "#e0ac7a", peleSombra: "#c68d5c", cabelo: "#1a1a1a", cabeloBrilho: "#3a3a3a", olhos: "#a78bfa", olhoBranco: "#fff", boca: "#8b1a1a", casaco: "#4c1d95", casacoDetalhe: "#2e1065", camisa: "#e0d5c7", calca: "#1a1a2e", bota: "#0a0a0a", botaDetalhe: "#3a3a3a", arma: "dagger" },
+    habilidades: [ { icone: "🗡️", nome: "Golpe", dano: 2.0, custo: 10, cd: 1, tipo: "dano" }, { icone: "💨", nome: "Esquiva", dano: 0, custo: 15, cd: 3, tipo: "esquiva" }, { icone: "☠️", nome: "Veneno", dano: 1.5, custo: 12, cd: 4, tipo: "veneno" }, { icone: "🗡️", nome: "Execução", dano: 3.5, custo: 30, cd: 6, tipo: "dano" } ] },
+  lyra: { nome: "Lyra", classe: "Ranger", cor: "#10b981", corGlow: "rgba(16,185,129,0.6)", corBg1: "#064e3b", corBg2: "#0a1f0a", hp: 110, mp: 90, forca: 12, agilidade: 24,
+    aparencia: { pele: "#e0ac7a", peleSombra: "#c68d5c", cabelo: "#7c2d12", cabeloBrilho: "#a16207", olhos: "#10b981", olhoBranco: "#fff", boca: "#8b1a1a", casaco: "#10b981", casacoDetalhe: "#065f46", camisa: "#e0d5c7", calca: "#14532d", bota: "#422006", botaDetalhe: "#7c2d12", arma: "bow" },
+    habilidades: [ { icone: "🏹", nome: "Flecha", dano: 2.0, custo: 8, cd: 1, tipo: "dano" }, { icone: "🐺", nome: "Lobo", dano: 1.8, custo: 20, cd: 6, tipo: "dano" }, { icone: "🌿", nome: "Cura", dano: -50, custo: 18, cd: 4, tipo: "cura" }, { icone: "🌫️", nome: "Névoa", dano: 3.5, custo: 25, cd: 7, tipo: "dano" } ] },
+  kaelthar: { nome: "Kaelthar", classe: "Cavaleiro Dragão", cor: "#ef4444", corGlow: "rgba(239,68,68,0.6)", corBg1: "#7f1d1d", corBg2: "#0a0505", hp: 180, mp: 60, forca: 26, agilidade: 12,
+    aparencia: { pele: "#e0ac7a", peleSombra: "#c68d5c", cabelo: "#dc2626", cabeloBrilho: "#f87171", olhos: "#fbbf24", olhoBranco: "#fff", boca: "#8b1a1a", casaco: "#dc2626", casacoDetalhe: "#7f1d1d", camisa: "#1a1a1a", calca: "#1c1917", bota: "#0a0a0a", botaDetalhe: "#292524", arma: "sword" },
+    habilidades: [ { icone: "⚔️", nome: "Golpe", dano: 2.2, custo: 8, cd: 1, tipo: "dano" }, { icone: "🔥", nome: "Fogo", dano: 1.8, custo: 18, cd: 3, tipo: "area" }, { icone: "🛡️", nome: "Escudo", dano: 0, custo: 12, cd: 5, tipo: "buff" }, { icone: "🐉", nome: "Fúria", dano: 4.0, custo: 30, cd: 8, tipo: "dano" } ] },
+  seraphina: { nome: "Seraphina", classe: "Clériga", cor: "#fbbf24", corGlow: "rgba(251,191,36,0.6)", corBg1: "#78350f", corBg2: "#1a1408", hp: 100, mp: 120, forca: 8, agilidade: 14,
+    aparencia: { pele: "#f5deb3", peleSombra: "#d4b88a", cabelo: "#fbbf24", cabeloBrilho: "#fde047", olhos: "#fef3c7", olhoBranco: "#fff", boca: "#8b1a1a", casaco: "#fbbf24", casacoDetalhe: "#b45309", camisa: "#fff", calca: "#eab308", bota: "#78350f", botaDetalhe: "#92400e", arma: "staff" },
+    habilidades: [ { icone: "☀️", nome: "Raio", dano: 1.5, custo: 12, cd: 1, tipo: "dano" }, { icone: "💚", nome: "Cura", dano: -40, custo: 20, cd: 3, tipo: "cura" }, { icone: "🛡️", nome: "Bênção", dano: 0, custo: 15, cd: 5, tipo: "buff" }, { icone: "🔥", nome: "Punição", dano: 2.8, custo: 25, cd: 6, tipo: "dano" } ] },
+  nyx: { nome: "Nyx", classe: "Feiticeira", cor: "#8b5cf6", corGlow: "rgba(139,92,246,0.6)", corBg1: "#4c1d95", corBg2: "#050510", hp: 80, mp: 160, forca: 8, agilidade: 16,
+    aparencia: { pele: "#e0d5c7", peleSombra: "#b8a89a", cabelo: "#1e1b4b", cabeloBrilho: "#312e81", olhos: "#c4b5fd", olhoBranco: "#fff", boca: "#8b1a1a", casaco: "#7c3aed", casacoDetalhe: "#4c1d95", camisa: "#1a1a1a", calca: "#1e1b4b", bota: "#0a0a0a", botaDetalhe: "#1e1b4b", arma: "staff" },
+    habilidades: [ { icone: "🌑", nome: "Vazio", dano: 2.0, custo: 15, cd: 1, tipo: "dano" }, { icone: "🌀", nome: "Distorção", dano: 1.2, custo: 20, cd: 4, tipo: "area" }, { icone: "👁️", nome: "Olhar", dano: 0, custo: 18, cd: 5, tipo: "stun" }, { icone: "💀", nome: "Aniquilação", dano: 4.5, custo: 40, cd: 10, tipo: "dano" } ] },
+  bromm: { nome: "Bromm", classe: "Bárbaro Anão", cor: "#f97316", corGlow: "rgba(249,115,22,0.6)", corBg1: "#7c2d12", corBg2: "#1a0505", hp: 200, mp: 50, forca: 25, agilidade: 6,
+    aparencia: { pele: "#c68642", peleSombra: "#a06a30", cabelo: "#a16207", cabeloBrilho: "#ca8a04", olhos: "#fbbf24", olhoBranco: "#fff", boca: "#8b1a1a", casaco: "#f97316", casacoDetalhe: "#7c2d12", camisa: "#1a1a1a", calca: "#1c1917", bota: "#0a0a0a", botaDetalhe: "#292524", arma: "hammer", barba: true },
+    habilidades: [ { icone: "🔨", nome: "Martelo", dano: 2.0, custo: 6, cd: 1, tipo: "dano" }, { icone: "💥", nome: "Impacto", dano: 1.8, custo: 15, cd: 3, tipo: "area" }, { icone: "🍺", nome: "Brinde", dano: -60, custo: 20, cd: 6, tipo: "cura" }, { icone: "⚒️", nome: "Forja", dano: 3.8, custo: 28, cd: 8, tipo: "dano" } ] }
+};
+/* ====================================================
+   SISTEMA DE CHUNKS
+   ==================================================== */
+const CHUNK_SIZE = 30;
+let chunksCarregados = {};
+let mapa = {};
+let arvoresHP = {};
+let chunksTanques = {};
+let chunksBaus = {};
+let chunksNpcs = {};
+let chunksFlora = {};
+let chunksMagicos = {};
+
+function chunkKey(cx, cy) { return `${cx},${cy}`; }
+function tileKey(x, y) { return `${x},${y}`; }
+function getTile(x, y) { const k = tileKey(x, y); return mapa[k] !== undefined ? mapa[k] : 0; }
+function setTile(x, y, v) { mapa[tileKey(x, y)] = v; }
+
+function gerarChunk(cx, cy) {
+  const k = chunkKey(cx, cy);
+  if (chunksCarregados[k]) return;
+  chunksCarregados[k] = true;
+  const baseX = cx * CHUNK_SIZE;
+  const baseY = cy * CHUNK_SIZE;
+  const biomeSeed = Math.sin(cx * 12.9898 + cy * 78.233) * 43758.5453;
+  const biomeRand = biomeSeed - Math.floor(biomeSeed);
+  let bioma = "floresta";
+  if (biomeRand < 0.15) bioma = "deserto";
+  else if (biomeRand < 0.30) bioma = "lago";
+  else if (biomeRand < 0.55) bioma = "floresta_densa";
+  else if (biomeRand < 0.75) bioma = "planicie";
+
+  for (let y = 0; y < CHUNK_SIZE; y++) {
+    for (let x = 0; x < CHUNK_SIZE; x++) {
+      const wx = baseX + x;
+      const wy = baseY + y;
+      const r = Math.random();
+      let tile = 0;
+      if (wx >= 15 && wx < 25 && wy >= 15 && wy < 25) {
+        tile = 0;
+      } else if (bioma === "deserto") {
+        if (r < 0.10) tile = 3;
+        else if (r < 0.14) tile = 4;
+      } else if (bioma === "lago") {
+        if (r < 0.35) tile = 1;
+        else if (r < 0.42) tile = 3;
+        else if (r < 0.50) tile = 4;
+      } else if (bioma === "floresta_densa") {
+        if (r < 0.35) tile = 4;
+        else if (r < 0.40) tile = 6;
+        else if (r < 0.42) tile = 1;
+      } else if (bioma === "planicie") {
+        if (r < 0.03) tile = 4;
+        else if (r < 0.05) tile = 3;
+      } else {
+        if (r < 0.12) tile = 4;
+        else if (r < 0.14) tile = 1;
+        else if (r < 0.17) tile = 3;
+        else if (r < 0.19) tile = 6;
+      }
+      setTile(wx, wy, tile);
+      if (tile === 4 || tile === 6) arvoresHP[tileKey(wx, wy)] = 3;
+    }
+  }
+
+  // Tanques
+  chunksTanques[k] = [];
+  const qtdT = 1 + Math.floor(Math.random() * 2);
+  for (let i = 0; i < qtdT; i++) {
+    const tx = baseX + 2 + Math.floor(Math.random() * (CHUNK_SIZE - 4));
+    const ty = baseY + 2 + Math.floor(Math.random() * (CHUNK_SIZE - 4));
+    if (tx >= 15 && tx < 25 && ty >= 15 && ty < 25) continue;
+    if (getTile(tx, ty) !== 0) continue;
+    const tr = Math.random();
+    let conteudo;
+    if (tr < 0.5) conteudo = { tipo: "ouro", qtd: 50 + Math.floor(Math.random() * 100) };
+    else if (tr < 0.75) conteudo = { tipo: "madeira", qtd: 3 + Math.floor(Math.random() * 5) };
+    else if (tr < 0.9) conteudo = { tipo: "chave", qtd: 1 + Math.floor(Math.random() * 2) };
+    else conteudo = { tipo: "pocao", qtd: 1 + Math.floor(Math.random() * 2) };
+    const t = { x: tx, y: ty, saqueado: false, conteudo, bob: Math.random() * Math.PI * 2, cor: ["#06b6d4", "#0891b2", "#3b82f6", "#0ea5e9"][Math.floor(Math.random() * 4)] };
+    chunksTanques[k].push(t);
+    tanques.push(t);
+  }
+
+  // Baús
+  chunksBaus[k] = [];
+  if (Math.random() < 0.4) {
+    const bx = baseX + 3 + Math.floor(Math.random() * (CHUNK_SIZE - 6));
+    const by = baseY + 3 + Math.floor(Math.random() * (CHUNK_SIZE - 6));
+    if (!(bx >= 15 && bx < 25 && by >= 15 && by < 25) && getTile(bx, by) === 0) {
+      const r = Math.random();
+      let raridade = "comum";
+      if (r > 0.95) raridade = "lendario";
+      else if (r > 0.80) raridade = "epico";
+      else if (r > 0.50) raridade = "raro";
+      const tiposBau = {
+        comum: { itens: 2, ouroMin: 30, ouroMax: 80, chanceArma: 0.15, chanceArmadura: 0.15 },
+        raro: { itens: 3, ouroMin: 80, ouroMax: 180, chanceArma: 0.40, chanceArmadura: 0.35 },
+        epico: { itens: 3, ouroMin: 150, ouroMax: 350, chanceArma: 0.65, chanceArmadura: 0.55 },
+        lendario: { itens: 4, ouroMin: 300, ouroMax: 600, chanceArma: 0.85, chanceArmadura: 0.80 }
+      };
+      const tipo = tiposBau[raridade];
+      const b = { x: bx, y: by, aberto: false, raridade, itens: tipo.itens, ouroMin: tipo.ouroMin, ouroMax: tipo.ouroMax, chanceArma: tipo.chanceArma, chanceArmadura: tipo.chanceArmadura, bob: Math.random() * Math.PI * 2 };
+      chunksBaus[k].push(b);
+      baus.push(b);
+    }
+  }
+
+  // NPCs
+  chunksNpcs[k] = [];
+  if (Math.random() < 0.25 && (cx !== 0 || cy !== 0)) {
+    const nx = baseX + 5 + Math.floor(Math.random() * (CHUNK_SIZE - 10));
+    const ny = baseY + 5 + Math.floor(Math.random() * (CHUNK_SIZE - 10));
+    if (getTile(nx, ny) === 0) {
+      const nomes = ["Ferreiro", "Mercador", "Sábio", "Viajante", "Caçador", "Alquimista"];
+      const n = { x: nx, y: ny, nome: nomes[Math.floor(Math.random() * nomes.length)], dialogo: `"Bem-vindo, aventureiro!"` };
+      chunksNpcs[k].push(n);
+      npcs.push(n);
+    }
+  }
+
+  // Flora
+  chunksFlora[k] = [];
+  const qtdF = 15 + Math.floor(Math.random() * 20);
+  for (let i = 0; i < qtdF; i++) {
+    const fx = baseX + Math.floor(Math.random() * CHUNK_SIZE);
+    const fy = baseY + Math.floor(Math.random() * CHUNK_SIZE);
+    const t = getTile(fx, fy);
+    if (t === 1 || t === 4 || t === 6) continue;
+    const f = { x: fx, y: fy, icone: ["🌿", "🍄", "🌻", "🌺", "🌱", "🌸"][Math.floor(Math.random() * 6)] };
+    chunksFlora[k].push(f);
+    flora.push(f);
+  }
+
+  // Monstros
+  chunksMagicos[k] = [];
+  if (cx !== 0 || cy !== 0) {
+    const qtdM = 2 + Math.floor(Math.random() * 4);
+    const tipos = [
+      { tipo: "goblin", nome: "Goblin", hp: 60, dano: 15, xp: 65, velocidade: 0.04, agressivo: true, velocidadeAtaque: 80, alcanceAtaque: 1.4 },
+      { tipo: "lobo", nome: "Lobo Faminto", hp: 50, dano: 14, xp: 50, velocidade: 0.05, agressivo: true, velocidadeAtaque: 70, alcanceAtaque: 1.3 }
+    ];
+    for (let i = 0; i < qtdM; i++) {
+      const mx = baseX + 3 + Math.floor(Math.random() * (CHUNK_SIZE - 6));
+      const my = baseY + 3 + Math.floor(Math.random() * (CHUNK_SIZE - 6));
+      if (getTile(mx, my) !== 0) continue;
+      const tmpl = tipos[Math.floor(Math.random() * tipos.length)];
+      const m = { x: mx, y: my, ...tmpl, hpAtual: tmpl.hp, hpMax: tmpl.hp, vivo: true, direcao: Math.random() * Math.PI * 2, cooldownAtaque: 0, hitFlash: 0, emAtaque: 0, stun: 0, veneno: 0, estadoIA: "patrulha" };
+      chunksMagicos[k].push(m);
+      magicos.push(m);
+    }
+  }
+}
+
+function descarregarChunksDistantes() {
+  const cxJog = Math.floor(jogador.x / CHUNK_SIZE);
+  const cyJog = Math.floor(jogador.y / CHUNK_SIZE);
+  const raioManter = 3;
+  const chunksParaRemover = [];
+  for (const k in chunksCarregados) {
+    const [cx, cy] = k.split(",").map(Number);
+    const dist = Math.max(Math.abs(cx - cxJog), Math.abs(cy - cyJog));
+    if (dist > raioManter) chunksParaRemover.push(k);
+  }
+  chunksParaRemover.forEach(k => {
+    const [cx, cy] = k.split(",").map(Number);
+    const baseX = cx * CHUNK_SIZE;
+    const baseY = cy * CHUNK_SIZE;
+    for (let y = 0; y < CHUNK_SIZE; y++) {
+      for (let x = 0; x < CHUNK_SIZE; x++) {
+        const wx = baseX + x;
+        const wy = baseY + y;
+        delete mapa[tileKey(wx, wy)];
+        delete arvoresHP[tileKey(wx, wy)];
+      }
+    }
+    if (chunksTanques[k]) { const ids = new Set(chunksTanques[k]); tanques = tanques.filter(t => !ids.has(t)); delete chunksTanques[k]; }
+    if (chunksBaus[k]) { const ids = new Set(chunksBaus[k]); baus = baus.filter(b => !ids.has(b)); delete chunksBaus[k]; }
+    if (chunksNpcs[k]) { const ids = new Set(chunksNpcs[k]); npcs = npcs.filter(n => !ids.has(n)); delete chunksNpcs[k]; }
+    if (chunksFlora[k]) { const ids = new Set(chunksFlora[k]); flora = flora.filter(f => !ids.has(f)); delete chunksFlora[k]; }
+    if (chunksMagicos[k]) { const ids = new Set(chunksMagicos[k]); magicos = magicos.filter(m => !ids.has(m)); delete chunksMagicos[k]; }
+    delete chunksCarregados[k];
+  });
+}
+
+function carregarChunksAoRedor() {
+  const cxJog = Math.floor(jogador.x / CHUNK_SIZE);
+  const cyJog = Math.floor(jogador.y / CHUNK_SIZE);
+  for (let dy = -2; dy <= 2; dy++) {
+    for (let dx = -2; dx <= 2; dx++) {
+      gerarChunk(cxJog + dx, cyJog + dy);
+    }
+  }
+}
+
+function gerarMundo() {
+  mapa = {};
+  arvoresHP = {};
+  chunksCarregados = {};
+  chunksTanques = {};
+  chunksBaus = {};
+  chunksNpcs = {};
+  chunksFlora = {};
+  chunksMagicos = {};
+  tanques = [];
+  baus = [];
+  npcs = [];
+  flora = [];
+  magicos = [];
+  const cxIni = Math.floor(20 / CHUNK_SIZE);
+  const cyIni = Math.floor(20 / CHUNK_SIZE);
+  for (let dy = -2; dy <= 2; dy++) {
+    for (let dx = -2; dx <= 2; dx++) {
+      gerarChunk(cxIni + dx, cyIni + dy);
+    }
+  }
+  // NPCs iniciais no spawn
+  npcs.push({ x: 22, y: 22, nome: "Ferreiro", dialogo: '"Bem-vindo!"' });
+  npcs.push({ x: 24, y: 23, nome: "Mercador", dialogo: '"Compre algo!"' });
+  npcs.push({ x: 20, y: 24, nome: "Sábio", dialogo: '"Cuidado à noite..."' });
+}
+/* ====================================================
+   DESENHO (personagem, arma, monstro, árvore)
+   ==================================================== */
+function desenharPersonagem(c, x, y, tamanho, ap, opcoes, armaEq) {
+  opcoes = opcoes || {};
+  const andando = opcoes.andando || false;
+  const frameAnimacao = opcoes.frameAnimacao || 0;
+  const atacando = opcoes.atacando || false;
+  const flash = opcoes.flash || false;
+  c.save();
+  c.translate(x, y);
+  const escala = tamanho / 24;
+  c.scale(escala, escala);
+  const bob = andando ? Math.sin(frameAnimacao * 0.35) * 1 : Math.sin(frameAnimacao * 0.06) * 0.5;
+  const atkOff = atacando ? Math.sin(frameAnimacao * 0.6) * 3 : 0;
+  c.globalAlpha = 0.35;
+  const auraGrad = c.createRadialGradient(0, 0, 2, 0, 0, 20);
+  auraGrad.addColorStop(0, ap.casaco);
+  auraGrad.addColorStop(1, "transparent");
+  c.fillStyle = auraGrad;
+  c.fillRect(-22, -22, 44, 44);
+  c.globalAlpha = 1;
+  c.fillStyle = "rgba(0,0,0,0.45)";
+  c.beginPath(); c.ellipse(0, 13, 9, 3, 0, 0, Math.PI * 2); c.fill();
+  c.fillStyle = ap.calca;
+  c.fillRect(-5, 4 + bob, 4, 8);
+  c.fillRect(1, 4 + bob, 4, 8);
+  c.fillStyle = ap.bota;
+  c.fillRect(-6, 11 + bob, 5, 3);
+  c.fillRect(1, 11 + bob, 5, 3);
+  c.fillStyle = ap.casaco;
+  c.fillRect(-7, -4 + bob, 14, 9);
+  c.fillStyle = ap.casacoDetalhe;
+  c.fillRect(-7, -4 + bob, 2, 9);
+  c.fillRect(5, -4 + bob, 2, 9);
+  c.fillStyle = ap.camisa;
+  c.fillRect(-2, -3 + bob, 4, 7);
+  c.fillStyle = ap.casaco;
+  c.fillRect(-10, -3 + bob, 4, 7);
+  c.fillRect(6, -3 + bob + atkOff, 4, 7);
+  c.fillStyle = ap.pele;
+  c.fillRect(-10, -3 + bob, 4, 3);
+  c.fillRect(6, -3 + bob + atkOff, 4, 3);
+  c.fillStyle = ap.peleSombra;
+  c.fillRect(-2, -5 + bob, 4, 2);
+  c.fillStyle = ap.pele;
+  c.fillRect(-6, -14 + bob, 12, 10);
+  c.fillStyle = ap.cabelo;
+  c.fillRect(-7, -16 + bob, 14, 5);
+  c.fillRect(-8, -15 + bob, 2, 6);
+  c.fillRect(6, -15 + bob, 2, 6);
+  c.fillRect(-6, -12 + bob, 4, 3);
+  c.fillRect(3, -12 + bob, 3, 2);
+  c.fillStyle = ap.cabeloBrilho;
+  c.fillRect(-4, -15 + bob, 3, 1);
+  c.fillRect(2, -15 + bob, 3, 1);
+  c.fillStyle = ap.olhoBranco;
+  c.fillRect(-5, -10 + bob, 4, 3);
+  c.fillRect(1, -10 + bob, 4, 3);
+  c.fillStyle = ap.olhos;
+  c.fillRect(-4, -10 + bob, 3, 3);
+  c.fillRect(2, -10 + bob, 3, 3);
+  c.fillStyle = "#000";
+  c.fillRect(-3, -10 + bob, 1, 3);
+  c.fillRect(3, -10 + bob, 1, 3);
+  c.fillStyle = "#fff";
+  c.fillRect(-4, -10 + bob, 1, 1);
+  c.fillRect(2, -10 + bob, 1, 1);
+  c.fillStyle = ap.cabelo;
+  c.fillRect(-5, -11 + bob, 4, 1);
+  c.fillRect(1, -11 + bob, 4, 1);
+  c.fillStyle = ap.boca;
+  c.fillRect(-1, -7 + bob, 2, 1);
+  if (ap.barba) { c.fillStyle = ap.cabelo; c.fillRect(-6, -6 + bob, 12, 3); }
+  const arma = armaEq || { pixel: ap.arma };
+  desenharArma(c, arma, bob, atkOff);
+  if (flash) {
+    c.globalCompositeOperation = "lighter";
+    c.fillStyle = "rgba(255,80,80,0.6)";
+    c.fillRect(-10, -16 + bob, 20, 30);
+    c.globalCompositeOperation = "source-over";
+  }
+  c.restore();
+}
+function desenharArma(c, arma, bob, atkOff) {
+  const px = 10 + atkOff;
+  const py = -3 + bob;
+  const pixel = arma.pixel || arma;
+  switch (pixel) {
+    case "sword_short":
+    case "sword_long":
+    case "sword_broad":
+      c.fillStyle = "#c0c0c0"; c.fillRect(px - 2, py, 12, 2);
+      c.fillStyle = "#e0e0e0"; c.fillRect(px - 2, py, 12, 1);
+      c.fillStyle = "#7c2d12"; c.fillRect(px - 3, py - 1, 2, 4);
+      break;
+    case "dagger":
+    case "stiletto":
+      c.fillStyle = "#c0c0c0"; c.fillRect(px, py - 1, 6, 2);
+      c.fillStyle = "#7c2d12"; c.fillRect(px - 1, py - 1.5, 1.5, 3);
+      break;
+    case "sword_fire":
+      c.fillStyle = "#ff6b00"; c.fillRect(px - 2, py, 12, 2);
+      c.fillStyle = "#ff3300"; c.fillRect(px - 3, py - 1, 2, 4);
+      break;
+    case "sword_ice":
+      c.fillStyle = "#88ddff"; c.fillRect(px - 2, py, 12, 2);
+      c.fillStyle = "#3b82f6"; c.fillRect(px - 3, py - 1, 2, 4);
+      break;
+    case "sword_poison":
+      c.fillStyle = "#22c55e"; c.fillRect(px - 2, py, 12, 2);
+      c.fillStyle = "#166534"; c.fillRect(px - 3, py - 1, 2, 4);
+      break;
+    case "sword_thunder":
+      c.fillStyle = "#fbbf24"; c.fillRect(px - 2, py, 12, 2);
+      break;
+    case "sword_holy":
+      c.fillStyle = "#fef3c7"; c.fillRect(px - 2, py, 12, 2);
+      break;
+    case "sword_dark":
+      c.fillStyle = "#1e1b4b"; c.fillRect(px - 2, py, 12, 2);
+      break;
+    case "excalibur":
+      c.fillStyle = "#fef3c7"; c.fillRect(px - 2, py, 14, 3);
+      c.fillStyle = "#fbbf24"; c.fillRect(px - 3, py - 2, 2, 5);
+      break;
+    case "axe":
+      c.fillStyle = "#7c2d12"; c.fillRect(px, py - 3, 2, 8);
+      c.fillStyle = "#c0c0c0"; c.fillRect(px - 2, py - 5, 5, 4);
+      break;
+    case "scythe":
+      c.fillStyle = "#1a1a1a"; c.fillRect(px - 3, py - 2, 2, 12);
+      c.fillStyle = "#4c1d95";
+      c.beginPath(); c.moveTo(px - 1, py - 2); c.quadraticCurveTo(px + 8, py - 6, px + 10, py); c.quadraticCurveTo(px + 6, py - 2, px - 1, py); c.closePath(); c.fill();
+      break;
+    case "bow":
+    case "longbow":
+    case "elven_bow":
+      c.strokeStyle = pixel === "elven_bow" ? "#10b981" : "#7c2d12";
+      c.lineWidth = 1.5;
+      c.beginPath(); c.arc(px + 2, py, 6, -Math.PI / 2, Math.PI / 2); c.stroke();
+      c.strokeStyle = "#fbbf24"; c.lineWidth = 0.5;
+      c.beginPath(); c.moveTo(px + 2, py - 6); c.lineTo(px + 2, py + 6); c.stroke();
+      break;
+    case "spear":
+    case "halberd":
+    case "trident":
+      c.fillStyle = "#7c2d12"; c.fillRect(px - 4, py - 1, 18, 1.5);
+      c.fillStyle = "#c0c0c0"; c.fillRect(px + 12, py - 2, 4, 4);
+      break;
+    case "rapier":
+      c.fillStyle = "#c0c0c0"; c.fillRect(px - 2, py, 14, 1.5);
+      break;
+    case "saber":
+      c.fillStyle = "#c0c0c0"; c.fillRect(px - 2, py, 12, 2);
+      break;
+    case "katana":
+      c.fillStyle = "#c0c0c0"; c.fillRect(px - 3, py - 1, 14, 1.5);
+      c.fillStyle = "#1a1a1a"; c.fillRect(px - 4, py - 1, 2, 2);
+      break;
+    case "sword":
+      c.fillStyle = "#c0c0c0"; c.fillRect(px, py - 2, 10, 2);
+      break;
+    case "staff":
+      c.fillStyle = "#7c2d12"; c.fillRect(px - 1, py - 8, 2, 14);
+      c.fillStyle = "#a78bfa";
+      c.beginPath(); c.arc(px, py - 9, 3, 0, Math.PI * 2); c.fill();
+      break;
+    case "hammer":
+      c.fillStyle = "#7c2d12"; c.fillRect(px, py - 3, 2, 10);
+      c.fillStyle = "#c0c0c0"; c.fillRect(px - 2, py - 5, 6, 4);
+      break;
+    default:
+      c.fillStyle = "#c0c0c0"; c.fillRect(px, py, 8, 2);
+  }
+}
+function desenharMonstro(c, x, y, tamanho, tipo, opcoes) {
+  opcoes = opcoes || {};
+  const direcao = opcoes.direcao || "right";
+  const andando = opcoes.andando || false;
+  const frameAnimacao = opcoes.frameAnimacao || 0;
+  const flash = opcoes.flash || false;
+  c.save();
+  c.translate(x, y);
+  const escala = tamanho / 32;
+  c.scale(escala, escala);
+  const bob = andando ? Math.sin(frameAnimacao * 0.5) * 1.5 : Math.sin(frameAnimacao * 0.08) * 0.6;
+  if (tipo === "goblin") {
+    c.fillStyle = "rgba(0,0,0,0.5)";
+    c.beginPath(); c.ellipse(0, 14, 11, 3.5, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = "#166534";
+    c.fillRect(-5, 6 + bob, 4, 7);
+    c.fillRect(1, 6 + bob, 4, 7);
+    c.fillStyle = "#15803d";
+    c.beginPath();
+    c.moveTo(-7, -2 + bob); c.lineTo(7, -2 + bob); c.lineTo(9, 8 + bob); c.lineTo(-9, 8 + bob);
+    c.closePath(); c.fill();
+    c.fillRect(-11, -2 + bob, 4, 9);
+    c.fillRect(7, -2 + bob, 4, 9);
+    c.fillStyle = "#16a34a";
+    c.beginPath(); c.ellipse(0, -8 + bob, 8.5, 7.5, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = "#15803d";
+    c.beginPath();
+    c.moveTo(-8, -10 + bob); c.lineTo(-14, -15 + bob); c.lineTo(-7, -12 + bob); c.closePath(); c.fill();
+    c.beginPath();
+    c.moveTo(8, -10 + bob); c.lineTo(14, -15 + bob); c.lineTo(7, -12 + bob); c.closePath(); c.fill();
+    const brilho = 0.9 + Math.sin(frameAnimacao * 0.15) * 0.1;
+    c.fillStyle = "#000";
+    c.beginPath();
+    c.ellipse(-3, -9 + bob, 2.7, 2.2, 0, 0, Math.PI * 2);
+    c.ellipse(3, -9 + bob, 2.7, 2.2, 0, 0, Math.PI * 2);
+    c.fill();
+    c.fillStyle = `rgba(250,204,21,${brilho})`;
+    c.beginPath();
+    c.arc(-3, -9 + bob, 1.7, 0, Math.PI * 2);
+    c.arc(3, -9 + bob, 1.7, 0, Math.PI * 2);
+    c.fill();
+  } else if (tipo === "lobo") {
+    c.fillStyle = "rgba(0,0,0,0.5)";
+    c.beginPath(); c.ellipse(0, 12, 13, 3.5, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = "#3f3f46";
+    c.beginPath(); c.ellipse(0, 4 + bob, 12, 7, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = "#27272a";
+    c.fillRect(-9, 8 + bob, 3.5, 6);
+    c.fillRect(-4, 9 + bob, 3.5, 5);
+    c.fillRect(2, 9 + bob, 3.5, 5);
+    c.fillRect(7, 8 + bob, 3.5, 6);
+    const dirSign = direcao === "left" ? -1 : 1;
+    c.save();
+    c.translate(dirSign * 10, -2 + bob);
+    c.scale(dirSign, 1);
+    c.fillStyle = "#3f3f46";
+    c.beginPath();
+    c.moveTo(-4, -3); c.lineTo(4, -3); c.lineTo(3, 3); c.lineTo(-3, 3);
+    c.closePath(); c.fill();
+    const brilho = 0.85 + Math.sin(frameAnimacao * 0.18) * 0.15;
+    c.fillStyle = `rgba(255,50,50,${brilho})`;
+    c.beginPath(); c.arc(1.5, -0.5, 1.3, 0, Math.PI * 2); c.fill();
+    c.restore();
+  } else {
+    c.fillStyle = "#666";
+    c.beginPath(); c.arc(0, 0, 12, 0, Math.PI * 2); c.fill();
+  }
+  if (flash) {
+    c.globalCompositeOperation = "lighter";
+    c.fillStyle = "rgba(255,80,80,0.7)";
+    c.beginPath(); c.arc(0, 2, 15, 0, Math.PI * 2); c.fill();
+    c.globalCompositeOperation = "source-over";
+  }
+  c.restore();
+}
+function desenharArvore(c, x, y, hp) {
+  const pct = hp / 3;
+  const balanco = Math.sin(animacaoFrame * 0.05 + x * 0.01) * 1.5;
+  c.fillStyle = "rgba(0,0,0,0.4)";
+  c.beginPath();
+  c.ellipse(x + TILE / 2, y + TILE - 3, TILE * 0.4, TILE * 0.15, 0, 0, Math.PI * 2);
+  c.fill();
+  c.fillStyle = "#8b4513";
+  c.fillRect(x + 14, y + 18, 4, 12);
+  const raioBase = TILE * 0.42;
+  const raio = raioBase * (0.6 + pct * 0.4);
+  c.fillStyle = "#7bc043";
+  c.beginPath();
+  c.arc(x + TILE / 2 + balanco, y + TILE / 2 - 2, raio, 0, Math.PI * 2);
+  c.fill();
+  c.fillStyle = "#5fa82c";
+  c.beginPath();
+  c.arc(x + TILE / 2 - 3 + balanco, y + TILE / 2 - 5, raio * 0.65, 0, Math.PI * 2);
+  c.fill();
+}
+/* ====================================================
+   ESTADO GLOBAL
+   ==================================================== */
+const TILE = 32;
+let jogador = null;
+let camera = { x: 0, y: 0, shakeX: 0, shakeY: 0, shakeIntensidade: 0 };
+let teclas = {};
+let magicos = [];
+let animais = [];
+let npcs = [];
+let flora = [];
+let itensFlutuantes = [];
+let baus = [];
+let tanques = [];
+let particulas = [];
+let animacaoFrame = 0;
+let dialogoAberto = false;
+let levelUpAberto = false;
+let jogoPausado = false;
+let inventarioAberto = false;
+let monstroFocado = null;
+let direcaoJogador = "down";
+let andando = false;
+let inventario = [];
+let equipamento = { arma: null, armadura: null, elmo: null };
+let ouro = 250;
+let chaves = 0;
+let rodando = false;
+let filtroAtual = "todos";
+let horaMundo = 6;
+let velocidadeTempo = 0.005;
+let noiteIntensidade = 0;
+let ultimoSpawnNoturno = 0;
+let notificouNoite = false;
+let notificouDia = false;
+let tanquesSaqueados = 0;
+let proximoPassoSurpresa = 25;
+let passosDados = 0;
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const minimapaCanvas = document.getElementById("minimapa");
+const minimapaCtx = minimapaCanvas.getContext("2d");
+/* ====================================================
+   MENU
+   ==================================================== */
+function irParaSelecao() {
+  document.getElementById("tela-menu").style.display = "none";
+  document.getElementById("tela-selecao").classList.add("ativo");
+}
+function voltarAoMenu() {
+  document.getElementById("tela-selecao").classList.remove("ativo");
+  document.getElementById("jogo").classList.remove("ativo");
+  document.getElementById("pause-overlay").classList.remove("ativo");
+  document.getElementById("inv-overlay").classList.remove("ativo");
+  document.getElementById("levelup-overlay").classList.remove("ativo");
+  document.getElementById("dialogo-overlay").classList.remove("ativo");
+  document.getElementById("tela-menu").style.display = "flex";
+  jogoPausado = false;
+  rodando = false;
+}
+function renderizarSelecao() {
+  const ids = Object.keys(herois);
+  document.getElementById("grid-herois").innerHTML = ids.map(id => {
+    const h = herois[id];
+    return `<div class="card-heroi" style="--cor: ${h.cor}; --cor-glow: ${h.corGlow}; --cor-bg-1: ${h.corBg1}; --cor-bg-2: ${h.corBg2};" onclick="iniciarJogo('${id}')">
+      <canvas class="avatar-canvas" id="avatar-${id}" width="220" height="220"></canvas>
+      <div class="nome">${h.nome}</div>
+      <div class="classe">${h.classe}</div>
+      <div class="stats-mini"><span>❤️ ${h.hp}</span><span>💧 ${h.mp}</span><span>⚔️ ${h.forca}</span></div>
+      <div class="btn">▶ JOGAR</div>
+    </div>`;
+  }).join("");
+  setTimeout(() => {
+    ids.forEach(id => {
+      const canvasEl = document.getElementById(`avatar-${id}`);
+      if (!canvasEl) return;
+      const c = canvasEl.getContext("2d");
+      c.imageSmoothingEnabled = false;
+      c.clearRect(0, 0, 220, 220);
+      desenharPersonagem(c, 110, 100, 220, herois[id].aparencia, { direcao: "down" });
+    });
+  }, 50);
+}
+/* ====================================================
+   INICIAR JOGO
+   ==================================================== */
+function iniciarJogo(heroiId) {
+  const h = herois[heroiId];
+  jogador = { id: heroiId, x: 20, y: 20, hp: h.hp, hpMax: h.hp, mp: h.mp, mpMax: h.mp, xp: 0, xpMax: 100, nivel: 1, forca: h.forca, agilidade: h.agilidade, nome: h.nome, aparencia: h.aparencia, cor: h.cor, corGlow: h.corGlow, cooldowns: [0, 0, 0, 0], hitFlash: 0, emAtaque: 0, invulneravel: 0, buffDefesa: 0, buffVelocidade: 0 };
+  particulas = [];
+  itensFlutuantes = [];
+  inventario = [
+    { ...CONSUMIVEIS.pocao_hp_pequena, qtd: 5 },
+    { ...CONSUMIVEIS.pocao_hp_media, qtd: 2 },
+    { ...CONSUMIVEIS.pocao_mp_pequena, qtd: 3 },
+    { ...ARMAS.adaga, qtd: 1 },
+    { ...ARMAS.machado_lenhador, qtd: 1 },
+    { ...ARMAS.armadura_couro, qtd: 1 },
+    { ...ARMAS.elmo_couro, qtd: 1 }
+  ];
+  equipamento = { arma: ARMAS.adaga, armadura: ARMAS.armadura_couro, elmo: ARMAS.elmo_couro };
+  ouro = 250;
+  chaves = 0;
+  horaMundo = 6;
+  noiteIntensidade = 0;
+  notificouNoite = false;
+  notificouDia = false;
+  tanquesSaqueados = 0;
+  passosDados = 0;
+  proximoPassoSurpresa = 25 + Math.floor(Math.random() * 20);
+  gerarMundo();
+  document.documentElement.style.setProperty("--cor", h.cor);
+  document.getElementById("hud-nome").textContent = h.nome;
+  const hudCanvas = document.getElementById("hud-avatar-canvas");
+  hudCanvas.width = 112;
+  hudCanvas.height = 112;
+  const hudCtx = hudCanvas.getContext("2d");
+  hudCtx.imageSmoothingEnabled = false;
+  hudCtx.clearRect(0, 0, 112, 112);
+  desenharPersonagem(hudCtx, 56, 52, 112, h.aparencia, { direcao: "down" }, equipamento.arma);
+  document.getElementById("tela-selecao").classList.remove("ativo");
+  document.getElementById("jogo").classList.add("ativo");
+  redimensionarCanvas();
+  renderizarHabilidades();
+  renderizarInventarioMini();
+  atualizarHUDEquip();
+  atualizarHUD();
+  notificar(`⚔️ ${h.nome} entrou no mundo infinito!`);
+  if (!rodando) { rodando = true; loopJogo(); }
+}
+function redimensionarCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  ctx.imageSmoothingEnabled = false;
+}
+window.addEventListener("resize", redimensionarCanvas);
+/* ====================================================
+   INPUT
+   ==================================================== */
+document.addEventListener("keydown", e => {
+  teclas[e.key.toLowerCase()] = true;
+  if (e.key === "Escape") {
+    if (inventarioAberto) fecharInventario();
+    else if (dialogoAberto) fecharDialogo();
+    else if (levelUpAberto) fecharLevelUp();
+    else if (jogoPausado) fecharPause();
+    else if (jogador && rodando) abrirPause();
+  }
+  if ((e.key === "e" || e.key === "E") && jogador && rodando && !levelUpAberto) {
+    if (inventarioAberto) fecharInventario();
+    else if (!dialogoAberto && !jogoPausado) {
+      if (!tentarInteragir()) abrirInventario();
+    }
+  }
+  if ((e.key === "i" || e.key === "I") && jogador && rodando && !levelUpAberto) {
+    if (inventarioAberto) fecharInventario();
+    else abrirInventario();
+  }
+  if (e.key === " " && jogador && rodando && !dialogoAberto && !jogoPausado && !levelUpAberto && !inventarioAberto) {
+    e.preventDefault();
+    atacarBasico();
+  }
+  if (["1", "2", "3", "4"].includes(e.key) && jogador && rodando && !dialogoAberto && !jogoPausado && !levelUpAberto && !inventarioAberto) {
+    usarHabilidade(parseInt(e.key) - 1);
+  }
+});
+document.addEventListener("keyup", e => { teclas[e.key.toLowerCase()] = false; });
+/* ====================================================
+   LOOP
+   ==================================================== */
+function loopJogo() {
+  if (rodando && jogador) {
+    animacaoFrame++;
+    if (!jogoPausado && !dialogoAberto && !levelUpAberto && !inventarioAberto) {
+      atualizarTempo();
+      atualizarJogador();
+      atualizarMagicos();
+      atualizarItensFlutuantes();
+      atualizarParticulas();
+      atualizarCooldowns();
+    }
+    if (camera.shakeIntensidade > 0) {
+      camera.shakeX = (Math.random() - 0.5) * camera.shakeIntensidade;
+      camera.shakeY = (Math.random() - 0.5) * camera.shakeIntensidade;
+      camera.shakeIntensidade *= 0.9;
+      if (camera.shakeIntensidade < 0.1) camera.shakeIntensidade = 0;
+    }
+    desenhar();
+    desenharMinimapa();
+    atualizarHUDMonstro();
+  }
+  requestAnimationFrame(loopJogo);
+}
+/* ====================================================
+   CICLO DIA/NOITE
+   ==================================================== */
+function atualizarTempo() {
+  horaMundo += velocidadeTempo;
+  if (horaMundo >= 24) horaMundo -= 24;
+  const h = horaMundo;
+  let alvo = 0;
+  if (h >= 19 || h < 5) alvo = 1;
+  else if (h >= 5 && h < 7) alvo = (7 - h) / 2;
+  else if (h >= 17 && h < 19) alvo = (h - 17) / 2;
+  noiteIntensidade += (alvo - noiteIntensidade) * 0.02;
+  const horaInt = Math.floor(horaMundo);
+  const minInt = Math.floor((horaMundo - horaInt) * 60);
+  const horaStr = `${String(horaInt).padStart(2, "0")}:${String(minInt).padStart(2, "0")}`;
+  let periodoIcone = "☀️", periodoNome = "Dia";
+  if (noiteIntensidade > 0.7) { periodoIcone = "🌙"; periodoNome = "Noite"; }
+  else if (noiteIntensidade > 0.3) {
+    if (horaMundo > 12) { periodoIcone = "🌆"; periodoNome = "Entardecer"; }
+    else { periodoIcone = "🌅"; periodoNome = "Amanhecer"; }
+  }
+  const elRelogio = document.getElementById("hud-relogio");
+  if (elRelogio) elRelogio.textContent = `${periodoIcone} ${horaStr} · ${periodoNome}`;
+  if (noiteIntensidade > 0.7 && !notificouNoite) { notificouNoite = true; notificouDia = false; notificar("🌙 A noite caiu... monstros estão surgindo!"); }
+  if (noiteIntensidade < 0.3 && !notificouDia && horaMundo > 5 && horaMundo < 12) { notificouDia = true; notificouNoite = false; notificar("☀️ O sol nasceu. Você está seguro..."); }
+  if (noiteIntensidade > 0.7 && animacaoFrame - ultimoSpawnNoturno > 180) {
+    ultimoSpawnNoturno = animacaoFrame;
+    tentarSpawnMonstroNoturno();
+  }
+}
+function tentarSpawnMonstroNoturno() {
+  const vivos = magicos.filter(m => m.vivo).length;
+  if (vivos >= 30) return;
+  const angulo = Math.random() * Math.PI * 2;
+  const dist = 10 + Math.random() * 10;
+  let sx = Math.floor(jogador.x + Math.cos(angulo) * dist);
+  let sy = Math.floor(jogador.y + Math.sin(angulo) * dist);
+  if (!podeAndar(sx, sy)) return;
+  const tipos = [
+    { tipo: "goblin", nome: "Goblin Sombrio", hp: 70, dano: 18, xp: 80, velocidade: 0.05, agressivo: true, velocidadeAtaque: 70, alcanceAtaque: 1.4 },
+    { tipo: "lobo", nome: "Lobo Faminto", hp: 55, dano: 16, xp: 60, velocidade: 0.06, agressivo: true, velocidadeAtaque: 65, alcanceAtaque: 1.3 }
+  ];
+  const m = tipos[Math.floor(Math.random() * tipos.length)];
+  magicos.push({ x: sx, y: sy, ...m, hpAtual: m.hp, hpMax: m.hp, vivo: true, direcao: Math.random() * Math.PI * 2, cooldownAtaque: 0, hitFlash: 0, emAtaque: 0, stun: 0, veneno: 0, estadoIA: "patrulha", noturno: true });
+  criarParticulas(sx, sy, "#8b5cf6", 15);
+}
+function spawnInimigoSurpresa() {
+  const vivos = magicos.filter(m => m.vivo).length;
+  if (vivos >= 35) return;
+  const angulo = Math.random() * Math.PI * 2;
+  const dist = 2.5 + Math.random() * 2;
+  let sx = Math.floor(jogador.x + Math.cos(angulo) * dist);
+  let sy = Math.floor(jogador.y + Math.sin(angulo) * dist);
+  if (!podeAndar(sx, sy)) return;
+  const tipos = [
+    { tipo: "goblin", nome: "Goblin Emboscador", hp: 80, dano: 20, xp: 90, velocidade: 0.06, agressivo: true, velocidadeAtaque: 60, alcanceAtaque: 1.4 },
+    { tipo: "lobo", nome: "Lobo Assassino", hp: 65, dano: 18, xp: 75, velocidade: 0.07, agressivo: true, velocidadeAtaque: 55, alcanceAtaque: 1.3 }
+  ];
+  const m = tipos[Math.floor(Math.random() * tipos.length)];
+  magicos.push({ x: sx, y: sy, ...m, hpAtual: m.hp, hpMax: m.hp, vivo: true, direcao: Math.random() * Math.PI * 2, cooldownAtaque: 0, hitFlash: 0, emAtaque: 0, stun: 0, veneno: 0, estadoIA: "persegue", surpresa: true });
+  criarParticulas(sx, sy, "#ef4444", 20);
+  camera.shakeIntensidade = 8;
+  notificar("⚠️ Emboscada! Um inimigo surgiu das sombras!");
+  criarDanoFlutuante(sx, sy - 0.5, "⚠️ SURPRESA!", "dano-jogador");
+}
+/* ====================================================
+   TANQUES
+   ==================================================== */
+function saquearTanque(tanque) {
+  tanque.saqueado = true;
+  tanquesSaqueados++;
+  criarParticulas(tanque.x, tanque.y, tanque.cor, 25);
+  camera.shakeIntensidade = 6;
+  const c = tanque.conteudo;
+  let msg = "";
+  if (c.tipo === "ouro") { ouro += c.qtd; msg = `💰 +${c.qtd} ouro`; criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${c.qtd} 💰`, "dano-critico"); }
+  else if (c.tipo === "madeira") { adicionarItemInventario({ ...MATERIAIS.madeira, qtd: c.qtd }); msg = `🪵 +${c.qtd} madeira`; criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${c.qtd} 🪵`, "dano-madeira"); }
+  else if (c.tipo === "chave") { chaves += c.qtd; adicionarItemInventario({ ...MATERIAIS.chave, qtd: c.qtd }); msg = `🔑 +${c.qtd} chave(s)`; criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${c.qtd} 🔑`, "dano-critico"); }
+  else if (c.tipo === "pocao") {
+    const pocs = [CONSUMIVEIS.pocao_hp_pequena, CONSUMIVEIS.pocao_hp_media, CONSUMIVEIS.pocao_mp_pequena];
+    const p = pocs[Math.floor(Math.random() * pocs.length)];
+    adicionarItemInventario({ ...p, qtd: c.qtd });
+    msg = `${p.icone} +${c.qtd} ${p.nome}`;
+    criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${c.qtd} ${p.icone}`, "dano-cura");
+  }
+  notificar(`🏦 Tanque saqueado! ${msg}`);
+  dialogoAberto = true;
+  document.getElementById("dlg-titulo").innerHTML = "🏦 Tanque Saqueado!";
+  document.getElementById("dlg-texto").innerHTML = `<div style="text-align:center;"><div style="font-size:48px; margin-bottom:15px;">🏦</div><div style="color:#06b6d4; font-weight:900; font-size:16px; margin-bottom:12px;">Você saqueou o tanque!</div><div style="color:#34d399; font-weight:900; font-size:20px;">${msg}</div></div>`;
+  document.getElementById("dlg-acoes").innerHTML = `<button class="dlg-btn principal" onclick="fecharDialogo()">✅ Coletar</button>`;
+  document.getElementById("dialogo-overlay").classList.add("ativo");
+  atualizarHUD();
+}
+/* ====================================================
+   JOGADOR
+   ==================================================== */
+function atualizarJogador() {
+  if (jogador.hp <= 0) return;
+  let dx = 0, dy = 0;
+  const velBase = 0.18;
+  let vel = velBase;
+  if (jogador.buffVelocidade > 0) vel *= 1.6;
+  if (teclas["w"] || teclas["arrowup"])    { dy -= vel; direcaoJogador = "up"; }
+  if (teclas["s"] || teclas["arrowdown"])  { dy += vel; direcaoJogador = "down"; }
+  if (teclas["a"] || teclas["arrowleft"])  { dx -= vel; direcaoJogador = "left"; }
+  if (teclas["d"] || teclas["arrowright"]) { dx += vel; direcaoJogador = "right"; }
+  if (dx && dy) { dx *= 0.707; dy *= 0.707; }
+  andando = (dx !== 0 || dy !== 0);
+  if (podeAndar(jogador.x + dx, jogador.y)) jogador.x += dx;
+  if (podeAndar(jogador.x, jogador.y + dy)) jogador.y += dy;
+  // MUNDO INFINITO - sem limites!
+  const alvoX = jogador.x * TILE - canvas.width / 2;
+  const alvoY = jogador.y * TILE - canvas.height / 2;
+  camera.x += (alvoX - camera.x) * 0.12;
+  camera.y += (alvoY - camera.y) * 0.12;
+  if (animacaoFrame % 30 === 0) {
+    carregarChunksAoRedor();
+    descarregarChunksDistantes();
+  }
+  if (jogador.hitFlash > 0) jogador.hitFlash--;
+  if (jogador.emAtaque > 0) jogador.emAtaque--;
+  if (jogador.invulneravel > 0) jogador.invulneravel--;
+  if (jogador.buffDefesa > 0) jogador.buffDefesa--;
+  if (jogador.buffVelocidade > 0) jogador.buffVelocidade--;
+  if (animacaoFrame % 180 === 0 && jogador.mp < jogador.mpMax) {
+    jogador.mp = Math.min(jogador.mpMax, jogador.mp + 1);
+    atualizarHUD();
+  }
+  if (andando && animacaoFrame % 4 === 0) {
+    passosDados++;
+    if (passosDados >= proximoPassoSurpresa) {
+      passosDados = 0;
+      proximoPassoSurpresa = 25 + Math.floor(Math.random() * 30);
+      spawnInimigoSurpresa();
+    }
+  }
+}
+function podeAndar(x, y) {
+  const tx = Math.floor(x), ty = Math.floor(y);
+  const tile = getTile(tx, ty);
+  return ![1, 2].includes(tile);
+}
+/* ====================================================
+   IA MONSTROS
+   ==================================================== */
+function atualizarMagicos() {
+  magicos.forEach(m => {
+    if (!m.vivo) return;
+    if (m.hitFlash > 0) m.hitFlash--;
+    if (m.emAtaque > 0) m.emAtaque--;
+    if (m.stun > 0) { m.stun--; return; }
+    if (m.veneno > 0) {
+      m.veneno--;
+      if (m.veneno % 60 === 0) {
+        m.hpAtual -= 5;
+        criarDanoFlutuante(m.x, m.y - 0.3, 5, "dano-normal");
+        if (m.hpAtual <= 0) { matarMagico(m); return; }
+      }
+    }
+    const dist = distancia(m.x, m.y, jogador.x, jogador.y);
+    const emAlcance = dist < m.alcanceAtaque;
+    const emVisao = dist < (m.noturno ? 12 : 9);
+    if (jogador.hp <= 0) m.estadoIA = "patrulha";
+    else if (emAlcance && m.cooldownAtaque <= 0) { m.estadoIA = "ataca"; magicoAtaca(m); }
+    else if (emVisao && m.agressivo) { m.estadoIA = "persegue"; magicoPersegue(m); }
+    else { m.estadoIA = "patrulha"; magicoPatrulha(m); }
+    if (m.cooldownAtaque > 0) m.cooldownAtaque--;
+  });
+}
+function magicoPatrulha(m) {
+  m.direcao += (Math.random() - 0.5) * 0.2;
+  const nx = m.x + Math.cos(m.direcao) * m.velocidade * 0.5;
+  const ny = m.y + Math.sin(m.direcao) * m.velocidade * 0.5;
+  if (podeAndar(nx, ny)) { m.x = nx; m.y = ny; }
+  else m.direcao += Math.PI;
+}
+function magicoPersegue(m) {
+  const dx = jogador.x - m.x, dy = jogador.y - m.y;
+  const d = Math.sqrt(dx * dx + dy * dy);
+  if (d === 0) return;
+  const nx = m.x + (dx / d) * m.velocidade;
+  const ny = m.y + (dy / d) * m.velocidade;
+  if (podeAndar(nx, m.y)) m.x = nx;
+  if (podeAndar(m.x, ny)) m.y = ny;
+  m.direcao = Math.atan2(dy, dx);
+}
+function magicoAtaca(m) {
+  m.cooldownAtaque = m.velocidadeAtaque;
+  m.emAtaque = 15;
+  if (jogador.invulneravel > 0) return;
+  const chanceErro = Math.max(0, jogador.agilidade * 0.008);
+  if (Math.random() < chanceErro) { criarDanoFlutuante(jogador.x, jogador.y - 0.5, "ERROU", "dano-jogador"); return; }
+  let dano = Math.floor(Math.random() * (m.dano * 0.5)) + Math.floor(m.dano * 0.75);
+  const defesaTotal = (equipamento.armadura?.defesa || 0) + (equipamento.elmo?.defesa || 0);
+  dano = Math.max(1, dano - Math.floor(defesaTotal / 2));
+  jogador.hp = Math.max(0, jogador.hp - dano);
+  jogador.hitFlash = 15;
+  camera.shakeIntensidade = Math.min(15, dano * 0.5);
+  criarDanoFlutuante(jogador.x, jogador.y - 0.5, dano, "dano-jogador");
+  atualizarHUD();
+  if (jogador.hp <= 0) morrer();
+}
+function atualizarItensFlutuantes() {
+  itensFlutuantes = itensFlutuantes.filter(it => it.vida > 0);
+  itensFlutuantes.forEach(it => {
+    it.vida--;
+    it.bob += 0.1;
+    if (distancia(it.x, it.y, jogador.x, jogador.y) < 1.0) {
+      adicionarItemInventario(it.item);
+      if (it.item.nome === "Chave") { chaves += it.item.qtd || 1; criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${it.item.qtd || 1} 🔑`, "dano-critico"); notificar(`🔑 +${it.item.qtd || 1} chave(s)! Total: ${chaves}`); }
+      else { criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${it.item.nome}`, "dano-cura"); }
+      it.vida = 0;
+    }
+  });
+}
+/* ====================================================
+   COMBATE
+   ==================================================== */
+function atacarBasico() {
+  if (!jogador || jogador.hp <= 0) return;
+  const alvo = magicos.find(m => m.vivo && distancia(jogador.x, jogador.y, m.x, m.y) < 1.8);
+  if (alvo) {
+    jogador.emAtaque = 12;
+    const danoArma = equipamento.arma?.dano || 5;
+    let dano = Math.floor(jogador.forca * 1.5) + Math.floor(Math.random() * jogador.forca) + danoArma;
+    const critico = Math.random() < (jogador.agilidade * 0.02);
+    if (critico) { dano = Math.floor(dano * 2); camera.shakeIntensidade = 12; }
+    alvo.hpAtual -= dano;
+    alvo.hitFlash = 10;
+    monstroFocado = alvo;
+    criarDanoFlutuante(alvo.x, alvo.y - 0.3, dano, critico ? "dano-critico" : "dano-normal");
+    criarParticulas(alvo.x, alvo.y, critico ? "#fbbf24" : "#dc2626", critico ? 20 : 12);
+    if (alvo.hpAtual <= 0) matarMagico(alvo);
+    return;
+  }
+  if (equipamento.arma && equipamento.arma.cortaArvore) {
+    const arvore = encontrarArvoreProxima();
+    if (arvore) { cortarArvore(arvore); return; }
+  }
+  notificar("Nenhum alvo próximo!");
+}
+function encontrarArvoreProxima() {
+  const px = Math.floor(jogador.x);
+  const py = Math.floor(jogador.y);
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      const tx = px + dx, ty = py + dy;
+      const t = getTile(tx, ty);
+      if (t === 4 || t === 6) {
+        const d = distancia(jogador.x, jogador.y, tx + 0.5, ty + 0.5);
+        if (d < 2.0) return { x: tx, y: ty, key: tileKey(tx, ty) };
+      }
+    }
+  }
+  return null;
+}
+function cortarArvore(arvore) {
+  jogador.emAtaque = 15;
+  const chave = arvore.key;
+  if (arvoresHP[chave] === undefined) arvoresHP[chave] = 3;
+  const danoBase = equipamento.arma?.bonusMadeira ? 2 : 1;
+  arvoresHP[chave] -= danoBase;
+  criarParticulas(arvore.x, arvore.y, "#8b4513", 12);
+  criarParticulas(arvore.x, arvore.y, "#7bc043", 8);
+  camera.shakeIntensidade = 6;
+  const madeiraQtd = equipamento.arma?.bonusMadeira ? 2 : 1;
+  adicionarItemInventario({ ...MATERIAIS.madeira, qtd: madeiraQtd });
+  criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${madeiraQtd} 🪵`, "dano-madeira");
+  if (arvoresHP[chave] <= 0) {
+    setTile(arvore.x, arvore.y, 5);
+    criarParticulas(arvore.x, arvore.y, "#8b4513", 25);
+    notificar(`🪓 Árvore derrubada! +${madeiraQtd} 🪵`);
+  } else {
+    notificar(`🪓 Cortando... (${arvoresHP[chave]}/3) +${madeiraQtd} 🪵`);
+  }
+  atualizarHUD();
+}
+function usarHabilidade(index) {
+  if (!jogador || jogador.hp <= 0) return;
+  const hab = herois[jogador.id].habilidades[index];
+  if (!hab) return;
+  if (jogador.cooldowns[index] > 0) { notificar(`⏳ ${hab.nome} em cooldown!`); return; }
+  if (jogador.mp < hab.custo) { notificar(`❌ MP insuficiente!`); return; }
+  jogador.mp -= hab.custo;
+  jogador.cooldowns[index] = hab.cd * 60;
+  switch (hab.tipo) {
+    case "dano": aplicarDano(hab); break;
+    case "cura": aplicarCura(hab); break;
+    case "area": aplicarArea(hab); break;
+    case "buff": jogador.buffDefesa = 300; notificar(`✨ ${hab.nome}!`); break;
+    case "esquiva": jogador.invulneravel = 180; notificar("💨 Invulnerável!"); break;
+    case "stun": aplicarStun(hab); break;
+    case "veneno": aplicarVeneno(hab); break;
+  }
+  atualizarHUD();
+  atualizarCooldownsVisual();
+}
+function aplicarDano(hab) {
+  const alvo = magicos.find(m => m.vivo && distancia(jogador.x, jogador.y, m.x, m.y) < 2.2);
+  if (!alvo) { notificar("Nenhum inimigo no alcance!"); return; }
+  const danoArma = equipamento.arma?.dano || 5;
+  const dano = Math.floor(jogador.forca * hab.dano) + Math.floor(Math.random() * 15) + danoArma;
+  alvo.hpAtual -= dano;
+  alvo.hitFlash = 15;
+  monstroFocado = alvo;
+  camera.shakeIntensidade = 10;
+  criarDanoFlutuante(alvo.x, alvo.y - 0.3, dano, "dano-critico");
+  criarParticulas(alvo.x, alvo.y, jogador.cor, 20);
+  notificar(`✨ ${hab.nome}! ${dano} de dano!`);
+  if (alvo.hpAtual <= 0) matarMagico(alvo);
+}
+function aplicarCura(hab) {
+  const cura = Math.abs(hab.dano);
+  jogador.hp = Math.min(jogador.hpMax, jogador.hp + cura);
+  criarDanoFlutuante(jogador.x, jogador.y - 0.5, `+${cura}`, "dano-cura");
+  criarParticulas(jogador.x, jogador.y, "#10b981", 15);
+  notificar(`💚 ${hab.nome}! +${cura} HP`);
+}
+function aplicarArea(hab) {
+  const alvos = magicos.filter(m => m.vivo && distancia(jogador.x, jogador.y, m.x, m.y) < 4);
+  if (alvos.length === 0) { notificar("Nenhum inimigo próximo!"); return; }
+  const danoArma = equipamento.arma?.dano || 5;
+  alvos.forEach(alvo => {
+    const dano = Math.floor(jogador.forca * hab.dano) + danoArma;
+    alvo.hpAtual -= dano;
+    alvo.hitFlash = 15;
+    criarDanoFlutuante(alvo.x, alvo.y - 0.3, dano, "dano-normal");
+    if (alvo.hpAtual <= 0) matarMagico(alvo);
+  });
+  camera.shakeIntensidade = 15;
+  notificar(`💥 ${hab.nome}! ${alvos.length} inimigos atingidos!`);
+}
+function aplicarStun(hab) {
+  const alvo = magicos.find(m => m.vivo && distancia(jogador.x, jogador.y, m.x, m.y) < 2.5);
+  if (!alvo) { notificar("Nenhum inimigo!"); return; }
+  alvo.stun = 180;
+  notificar(`👁️ ${alvo.nome} paralisado!`);
+}
+function aplicarVeneno(hab) {
+  const alvo = magicos.find(m => m.vivo && distancia(jogador.x, jogador.y, m.x, m.y) < 2.2);
+  if (!alvo) { notificar("Nenhum inimigo!"); return; }
+  const dano = Math.floor(jogador.forca * hab.dano);
+  alvo.hpAtual -= dano;
+  alvo.veneno = 300;
+  alvo.hitFlash = 12;
+  criarDanoFlutuante(alvo.x, alvo.y - 0.3, dano, "dano-normal");
+  notificar(`☠️ Veneno aplicado!`);
+  if (alvo.hpAtual <= 0) matarMagico(alvo);
+}
+function matarMagico(m) {
+  m.vivo = false;
+  ganharXP(m.xp);
+  ouro += 20;
+  criarParticulas(m.x, m.y, "#dc2626", 40);
+  criarDanoFlutuante(m.x, m.y - 0.5, `+${m.xp} XP`, "dano-cura");
+  notificar(`☠️ ${m.nome} derrotado!`);
+  const rnd = Math.random();
+  if (rnd < 0.25) {
+    const todasArmas = Object.values(ARMAS);
+    const item = todasArmas[Math.floor(Math.random() * todasArmas.length)];
+    itensFlutuantes.push({ x: m.x, y: m.y, item: { ...item, qtd: 1 }, vida: 600, bob: 0 });
+  } else if (rnd < 0.55) {
+    const itens = [CONSUMIVEIS.pocao_hp_pequena, CONSUMIVEIS.pocao_mp_pequena, CONSUMIVEIS.elixir_xp];
+    const item = itens[Math.floor(Math.random() * itens.length)];
+    itensFlutuantes.push({ x: m.x, y: m.y, item: { ...item, qtd: 1 }, vida: 600, bob: 0 });
+  } else if (rnd < 0.75) {
+    itensFlutuantes.push({ x: m.x, y: m.y, item: { ...MATERIAIS.madeira, qtd: 1 + Math.floor(Math.random() * 3) }, vida: 600, bob: 0 });
+  }
+  const chanceChave = m.tipo === "lobo" ? 0.55 : 0.75;
+  if (Math.random() < chanceChave) {
+    const qtdChave = m.tipo === "lobo" ? 1 : 1 + Math.floor(Math.random() * 2);
+    itensFlutuantes.push({ x: m.x, y: m.y, item: { ...MATERIAIS.chave, qtd: qtdChave }, vida: 600, bob: 0 });
+    criarParticulas(m.x, m.y, "#fbbf24", 12);
+  }
+  atualizarHUD();
+}
+/* ====================================================
+   XP / LEVEL UP
+   ==================================================== */
+function ganharXP(qtd) {
+  jogador.xp += qtd;
+  while (jogador.xp >= jogador.xpMax) {
+    jogador.xp -= jogador.xpMax;
+    jogador.nivel++;
+    jogador.xpMax = Math.floor(jogador.xpMax * 1.5);
+    const hpAdd = 25, mpAdd = 15, forAdd = 3;
+    jogador.hpMax += hpAdd;
+    jogador.mpMax += mpAdd;
+    jogador.forca += forAdd;
+    jogador.agilidade += 1;
+    jogador.hp = jogador.hpMax;
+    jogador.mp = jogador.mpMax;
+    criarParticulas(jogador.x, jogador.y, "#fbbf24", 50);
+    camera.shakeIntensidade = 15;
+    mostrarLevelUp(hpAdd, mpAdd, forAdd);
+  }
+}
+function mostrarLevelUp(hpAdd, mpAdd, forAdd) {
+  levelUpAberto = true;
+  document.getElementById("lu-nivel").textContent = jogador.nivel;
+  document.getElementById("lu-hp").textContent = `+${hpAdd}`;
+  document.getElementById("lu-mp").textContent = `+${mpAdd}`;
+  document.getElementById("lu-forca").textContent = `+${forAdd}`;
+  document.getElementById("levelup-overlay").classList.add("ativo");
+}
+function fecharLevelUp() { levelUpAberto = false; document.getElementById("levelup-overlay").classList.remove("ativo"); }
+/* ====================================================
+   INVENTÁRIO
+   ==================================================== */
+function adicionarItemInventario(item) {
+  const existente = inventario.find(i => i.nome === item.nome);
+  if (existente) existente.qtd = (existente.qtd || 1) + (item.qtd || 1);
+  else {
+    if (inventario.length >= 48) { notificar("❌ Inventário cheio!"); return; }
+    inventario.push({ ...item, qtd: item.qtd || 1 });
+  }
+  renderizarInventarioMini();
+}
+function abrirInventario() {
+  inventarioAberto = true;
+  document.getElementById("inv-overlay").classList.add("ativo");
+  renderizarInventario();
+}
+function fecharInventario() {
+  inventarioAberto = false;
+  document.getElementById("inv-overlay").classList.remove("ativo");
+}
+function abrirInventarioDoPause() { fecharPause(); abrirInventario(); }
+function filtrarInv(tipo, btn) {
+  filtroAtual = tipo;
+  document.querySelectorAll(".inv-filtro").forEach(b => b.classList.remove("ativo"));
+  if (btn) btn.classList.add("ativo");
+  renderizarInventario();
+}
+function renderizarInventario() {
+  const grid = document.getElementById("inv-grid");
+  const gridEquip = document.getElementById("inv-grid-equip");
+  let itensFiltrados = inventario;
+  if (filtroAtual === "arma") itensFiltrados = inventario.filter(i => i.tipo === "arma");
+  else if (filtroAtual === "armadura") itensFiltrados = inventario.filter(i => i.tipo === "armadura");
+  else if (filtroAtual === "elmo") itensFiltrados = inventario.filter(i => i.tipo === "elmo");
+  else if (filtroAtual === "consumivel") itensFiltrados = inventario.filter(i => i.tipo === "consumivel");
+  else if (filtroAtual === "material") itensFiltrados = inventario.filter(i => i.tipo === "material");
+  grid.innerHTML = itensFiltrados.map((item) => {
+    const realIdx = inventario.indexOf(item);
+    const rar = RARIDADES[item.raridade] || RARIDADES.comum;
+    return `<div class="inv-slot" style="border-color: ${rar.cor};" onclick="selecionarItem(${realIdx})" onmouseenter="mostrarInfoItem(${realIdx})" title="${item.nome}">
+      ${item.icone}
+      <div class="inv-slot-raridade" style="background: ${rar.cor}20; color: ${rar.cor}; border: 1px solid ${rar.cor};">${rar.nome[0]}</div>
+      ${item.qtd > 1 ? `<div class="inv-slot-qtd">${item.qtd}</div>` : ''}
+    </div>`;
+  }).join("");
+  if (itensFiltrados.length === 0) grid.innerHTML = '<div style="grid-column: span 6; color:#6b7280; text-align:center; padding:20px; font-style:italic;">Nenhum item nesta categoria</div>';
+  const equipados = [
+    { slot: "arma", label: "Arma", item: equipamento.arma },
+    { slot: "armadura", label: "Armadura", item: equipamento.armadura },
+    { slot: "elmo", label: "Elmo", item: equipamento.elmo }
+  ];
+  gridEquip.innerHTML = equipados.map(eq => {
+    if (!eq.item) return `<div class="inv-slot vazio">❓<div class="inv-slot-nome">${eq.label}</div></div>`;
+    const rar = RARIDADES[eq.item.raridade] || RARIDADES.comum;
+    return `<div class="inv-slot equipado" style="border-color: ${rar.cor};" onclick="desequiparItem('${eq.slot}')" onmouseenter="mostrarInfoItemEquipado('${eq.slot}')" title="${eq.item.nome} (clique para desequipar)">
+      ${eq.item.icone}
+      <div class="inv-slot-raridade" style="background: ${rar.cor}20; color: ${rar.cor}; border: 1px solid ${rar.cor};">${rar.nome[0]}</div>
+      <div class="inv-slot-nome">${eq.item.nome}</div>
+    </div>`;
+  }).join("");
+}
+function mostrarInfoItem(idx) {
+  const item = inventario[idx];
+  if (!item) return;
+  const rar = RARIDADES[item.raridade] || RARIDADES.comum;
+  const painel = document.getElementById("inv-info-painel");
+  let stats = "";
+  if (item.dano) stats += `<div class="inv-info-stat">⚔️ Dano: <b>${item.dano}</b></div>`;
+  if (item.defesa) stats += `<div class="inv-info-stat">🛡️ Defesa: <b>${item.defesa}</b></div>`;
+  if (item.efeito) stats += `<div class="inv-info-stat">✨ Efeito: <b>${item.efeito}</b></div>`;
+  if (item.valor && item.tipo === "consumivel") stats += `<div class="inv-info-stat">💫 Valor: <b>${item.valor}</b></div>`;
+  if (item.cortaArvore) stats += `<div class="inv-info-stat">🪓 Corta Árvores: <b>Sim</b></div>`;
+  painel.innerHTML = `<div class="inv-info-titulo" style="color: ${rar.cor};">${item.icone} ${item.nome} <span style="font-size:12px;">(${rar.nome})</span></div><div class="inv-info-desc">"${item.desc || 'Item misterioso.'}"</div><div class="inv-info-stats">${stats}</div>`;
+}
+function mostrarInfoItemEquipado(slot) {
+  const item = equipamento[slot];
+  if (!item) return;
+  const rar = RARIDADES[item.raridade] || RARIDADES.comum;
+  const painel = document.getElementById("inv-info-painel");
+  let stats = "";
+  if (item.dano) stats += `<div class="inv-info-stat">⚔️ Dano: <b>${item.dano}</b></div>`;
+  if (item.defesa) stats += `<div class="inv-info-stat">🛡️ Defesa: <b>${item.defesa}</b></div>`;
+  painel.innerHTML = `<div class="inv-info-titulo" style="color: ${rar.cor};">${item.icone} ${item.nome} (EQUIPADO)</div><div class="inv-info-desc">"${item.desc || 'Item misterioso.'}"</div><div class="inv-info-stats">${stats}</div>`;
+}
+function selecionarItem(idx) {
+  const item = inventario[idx];
+  if (!item) return;
+  if (item.tipo === "consumivel") { usarConsumivel(item, idx); return; }
+  let slot = null;
+  if (item.tipo === "arma") slot = "arma";
+  else if (item.tipo === "armadura") slot = "armadura";
+  else if (item.tipo === "elmo") slot = "elmo";
+  if (!slot) return;
+  if (equipamento[slot]) inventario.push({ ...equipamento[slot], qtd: 1 });
+  equipamento[slot] = item;
+  if (item.qtd > 1) item.qtd--;
+  else inventario.splice(idx, 1);
+  notificar(`✅ ${item.nome} equipado!`);
+  atualizarHUDEquip();
+  renderizarInventario();
+  atualizarHUD();
+}
+function usarConsumivel(item, idx) {
+  if (item.efeito === "hp") { jogador.hp = Math.min(jogador.hpMax, jogador.hp + item.valor); notificar(`💚 +${item.valor} HP!`); }
+  else if (item.efeito === "mp") { jogador.mp = Math.min(jogador.mpMax, jogador.mp + item.valor); notificar(`💧 +${item.valor} MP!`); }
+  else if (item.efeito === "xp") { ganharXP(item.valor); notificar(`⭐ +${item.valor} XP!`); }
+  if (item.qtd > 1) item.qtd--;
+  else inventario.splice(idx, 1);
+  atualizarHUD();
+  renderizarInventario();
+}
+function desequiparItem(slot) {
+  const item = equipamento[slot];
+  if (!item) return;
+  inventario.push({ ...item, qtd: 1 });
+  equipamento[slot] = null;
+  notificar(`🗑️ ${item.nome} desequipado`);
+  atualizarHUDEquip();
+  renderizarInventario();
+}
+function atualizarHUDEquip() {
+  const arma = equipamento.arma;
+  const armadura = equipamento.armadura;
+  if (arma) { document.getElementById("hud-equip-arma-icone").textContent = arma.icone; document.getElementById("hud-equip-arma-nome").textContent = arma.nome; document.getElementById("hud-equip-arma").classList.add("ativo"); }
+  else { document.getElementById("hud-equip-arma-icone").textContent = "—"; document.getElementById("hud-equip-arma-nome").textContent = "Sem arma"; document.getElementById("hud-equip-arma").classList.remove("ativo"); }
+  if (armadura) { document.getElementById("hud-equip-armadura-icone").textContent = armadura.icone; document.getElementById("hud-equip-armadura-nome").textContent = armadura.nome; document.getElementById("hud-equip-armadura").classList.add("ativo"); }
+  else { document.getElementById("hud-equip-armadura-icone").textContent = "—"; document.getElementById("hud-equip-armadura-nome").textContent = "Sem armadura"; document.getElementById("hud-equip-armadura").classList.remove("ativo"); }
+}
+/* ====================================================
+   INTERAÇÃO
+   ==================================================== */
+function tentarInteragir() {
+  const tanque = tanques.find(t => !t.saqueado && distancia(jogador.x, jogador.y, t.x, t.y) < 1.8);
+  if (tanque) { saquearTanque(tanque); return true; }
+  const bau = baus.find(b => !b.aberto && distancia(jogador.x, jogador.y, b.x, b.y) < 1.8);
+  if (bau) { abrirBau(bau); return true; }
+  const npc = npcs.find(n => distancia(jogador.x, jogador.y, n.x, n.y) < 1.8);
+  if (npc) {
+    dialogoAberto = true;
+    document.getElementById("dlg-titulo").innerHTML = `🧑 ${npc.nome}`;
+    document.getElementById("dlg-texto").textContent = npc.dialogo || `"Bem-vindo!"`;
+    document.getElementById("dlg-acoes").innerHTML = `<button class="dlg-btn principal" onclick="fecharDialogo()">Fechar</button>`;
+    document.getElementById("dialogo-overlay").classList.add("ativo");
+    return true;
+  }
+  return false;
+}
+function fecharDialogo() { dialogoAberto = false; document.getElementById("dialogo-overlay").classList.remove("ativo"); }
+/* ====================================================
+   BAÚS
+   ==================================================== */
+function abrirBau(bau) {
+  const rar = RARIDADES[bau.raridade] || RARIDADES.comum;
+  const custo = CHAVES_POR_BAU[bau.raridade] || 1;
+  if (chaves < custo) {
+    notificar(`🔒 Baú ${rar.nome} precisa de ${custo} chave(s)!`);
+    dialogoAberto = true;
+    document.getElementById("dlg-titulo").innerHTML = `🔒 Baú Trancado (${rar.nome})`;
+    document.getElementById("dlg-texto").innerHTML = `<div style="text-align:center;"><div style="font-size:48px; margin-bottom:15px;">🔒</div><div style="color:#f87171; font-weight:900; font-size:16px;">Precisa de ${custo} chave(s)!</div><div style="color:#fbbf24; font-size:14px; margin-top:10px;">Você tem: <b>${chaves}</b></div></div>`;
+    document.getElementById("dlg-acoes").innerHTML = `<button class="dlg-btn principal" onclick="fecharDialogo()">OK</button>`;
+    document.getElementById("dialogo-overlay").classList.add("ativo");
+    return;
+  }
+  chaves -= custo;
+  bau.aberto = true;
+  criat gradJ = ctx.createRadialGradient(pjx, pjy, 2, pjx, pjy, TILE * 1.4);
+  gradJ.addColorStop(0, jogador.corGlow);
+  gradJ.addColorStop(1, "transparent");
+  ctx.fillStyle = gradJ;
+  ctx.fillRect(pjx - TILE * 2, pjy - TILE * 2, TILE * 4, TILE * 4);
+  desenharPersonagem(ctx, pjx, pjy + 4, 34, jogador.aparencia, { direcao: direcaoJogador, atacando: jogador.emAtaque > 0, andando: andando, frameAnimacao: animacaoFrame, flash: jogador.hitFlash > 0 }, equipamento.arma);
+  if (jogador.invulneravel > 0) {
+    ctx.strokeStyle = `rgba(255,255,255,${Math.sin(animacaoFrame * 0.3) * 0.5 + 0.5})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(pjx, pjy, TILE * 0.9, 0, Math.PI * 2); ctx.stroke();
+  }
+  particulas.forEach(p => {
+    ctx.globalAlpha = p.vida / 55;
+    ctx.fillStyle = p.cor;
+    ctx.fillRect(p.x + offX - p.tamanho / 2, p.y + offY - p.tamanho / 2, p.tamanho, p.tamanho);
+  });
+  ctx.globalAlpha = 1;
+
+  if (noiteIntensidade > 0.05) {
+    ctx.fillStyle = `rgba(10, 15, 40, ${noiteIntensidade * 0.55})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const luzRaio = TILE * 4.5;
+    const gradLuz = ctx.createRadialGradient(pjx, pjy, 10, pjx, pjy, luzRaio);
+    gradLuz.addColorStop(0, `rgba(255,220,150,${0.35 * noiteIntensidade})`);
+    gradLuz.addColorStop(0.6, `rgba(255,180,80,${0.12 * noiteIntensidade})`);
+    gradLuz.addColorStop(1, "transparent");
+    ctx.globalCompositeOperation = "lighter";
+    ctx.fillStyle = gradLuz;
+    ctx.fillRect(pjx - luzRaio, pjy - luzRaio, luzRaio * 2, luzRaio * 2);
+    ctx.globalCompositeOperation = "source-over";
+  }
+  const vin = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, canvas.height * 0.5, canvas.width / 2, canvas.height / 2, canvas.height);
+  vin.addColorStop(0, "transparent");
+  vin.addColorStop(1, `rgba(0,0,0,${0.35 + noiteIntensidade * 0.3})`);
+  ctx.fillStyle = vin;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+function desenharTile(tile, x, y, mapX, mapY) {
+  if (tile === 0) {
+    ctx.fillStyle = "#7bc043"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#5fa82c";
+    const seed = (mapX * 7 + mapY * 13) % 4;
+    if (seed === 0) ctx.fillRect(x + 4, y + 8, 3, 3);
+    else if (seed === 1) ctx.fillRect(x + 18, y + 12, 2, 2);
+    else if (seed === 2) ctx.fillRect(x + 10, y + 22, 3, 2);
+  } else if (tile === 1) {
+    ctx.fillStyle = "#4ba3d4"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#7dc4ea";
+    const onda = Math.sin(animacaoFrame * 0.05 + mapX * 0.1) * 3;
+    ctx.fillRect(x + 4, y + 10 + onda, TILE - 8, 2);
+  } else if (tile === 2) {
+    ctx.fillStyle = "#8b6d47"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#a88a5f"; ctx.fillRect(x + 2, y + 2, 12, 12); ctx.fillRect(x + 18, y + 16, 10, 10);
+  } else if (tile === 3) {
+    ctx.fillStyle = "#d4c48a"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#e8d9a0"; ctx.fillRect(x + 8, y + 12, 3, 3);
+  } else if (tile === 5) {
+    ctx.fillStyle = "#7bc043"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#5fa82c";
+    const seed = (mapX * 7 + mapY * 13) % 4;
+    if (seed === 0) ctx.fillRect(x + 4, y + 8, 3, 3);
+    ctx.fillStyle = "rgba(0,0,0,0.4)";
+    ctx.beginPath(); ctx.ellipse(x + TILE / 2, y + TILE - 3, TILE * 0.4, TILE * 0.15, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#8b4513"; ctx.fillRect(x + 12, y + 20, 8, 10);
+  }
+}
+function desenharMinimapa() {
+  if (!jogador) return;
+  minimapaCtx.fillStyle = "rgba(0,0,0,0.95)";
+  minimapaCtx.fillRect(0, 0, 220, 165);
+  const janelaL = 30, janelaA = 22;
+  const escalaX = 220 / janelaL, escalaY = 165 / janelaA;
+  const baseX = Math.floor(jogador.x) - Math.floor(janelaL / 2);
+  const baseY = Math.floor(jogador.y) - Math.floor(janelaA / 2);
+  for (let y = 0; y < janelaA; y++) {
+    for (let x = 0; x < janelaL; x++) {
+      const tile = getTile(baseX + x, baseY + y);
+      if (tile === 1) minimapaCtx.fillStyle = "#3b82f6";
+      else if (tile === 4 || tile === 6) minimapaCtx.fillStyle = "#166534";
+      else if (tile === 3) minimapaCtx.fillStyle = "#d4c48a";
+      else if (tile === 5) minimapaCtx.fillStyle = "#8b6d47";
+      else minimapaCtx.fillStyle = "#5da82a";
+      minimapaCtx.fillRect(x * escalaX, y * escalaY, Math.ceil(escalaX), Math.ceil(escalaY));
+    }
+  }
+  const paraMini = (wx, wy) => ({ mx: (wx - baseX) * escalaX, my: (wy - baseY) * escalaY });
+  magicos.forEach(m => {
+    if (!m.vivo) return;
+    const p = paraMini(m.x, m.y);
+    if (p.mx < -4 || p.mx > 224 || p.my < -4 || p.my > 169) return;
+    minimapaCtx.fillStyle = m.noturno ? "#a78bfa" : m.surpresa ? "#f97316" : "#dc2626";
+    minimapaCtx.fillRect(p.mx - 1, p.my - 1, 3, 3);
+  });
+  baus.forEach(b => {
+    if (b.aberto) return;
+    const p = paraMini(b.x, b.y);
+    if (p.mx < -4 || p.mx > 224 || p.my < -4 || p.my > 169) return;
+    const rar = RARIDADES[b.raridade] || RARIDADES.comum;
+    minimapaCtx.fillStyle = rar.cor;
+    minimapaCtx.fillRect(p.mx - 2, p.my - 2, 4, 4);
+  });
+  tanques.forEach(t => {
+    if (t.saqueado) return;
+    const p = paraMini(t.x, t.y);
+    if (p.mx < -4 || p.mx > 224 || p.my < -4 || p.my > 169) return;
+    minimapaCtx.fillStyle = "#06b6d4";
+    minimapaCtx.fillRect(p.mx - 2, p.my - 2, 4, 4);
+  });
+  minimapaCtx.fillStyle = jogador.cor;
+  minimapaCtx.beginPath();
+  minimapaCtx.arc(Math.floor(janelaL / 2) * escalaX, Math.floor(janelaA / 2) * escalaY, 4, 0, Math.PI * 2);
+  minimapaCtx.fill();
+  minimapaCtx.strokeStyle = "#fff"; minimapaCtx.lineWidth = 1.5; minimapaCtx.stroke();
+}
+/* ====================================================
+   UTILITÁRIOS
+   ==================================================== */
+function distancia(x1, y1, x2, y2) { return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2); }
+let notifTimer = null;
+function notificar(msg) {
+  const el = document.getElementById("notificacao");
+  el.textContent = msg;
+  el.classList.add("ativa");
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(() => el.classList.remove("ativa"), 2200);
+}
+/* ====================================================
+   PAUSE / MORTE
+   ==================================================== */
+function abrirPause() { jogoPausado = true; document.getElementById("pause-overlay").classList.add("ativo"); }
+function fecharPause() { jogoPausado = false; document.getElementById("pause-overlay").classList.remove("ativo"); }
+function salvarJogo() { notificar("💾 Jogo salvo!"); }
+function morrer() {
+  dialogoAberto = true;
+  document.getElementById("dlg-titulo").innerHTML = "💀 Você Morreu";
+  document.getElementById("dlg-texto").textContent = "As criaturas consumiram sua alma...";
+  document.getElementById("dlg-acoes").innerHTML = `<button class="dlg-btn principal" onclick="reviver()">💖 Reviver</button><button class="dlg-btn perigo" onclick="voltarAoMenu()">🚪 Menu</button>`;
+  document.getElementById("dialogo-overlay").classList.add("ativo");
+}
+function reviver() {
+  jogador.hp = jogador.hpMax;
+  jogador.mp = jogador.mpMax;
+  jogador.x = 20; jogador.y = 20;
+  jogador.invulneravel = 240;
+  fecharDialogo();
+  atualizarHUD();
+  notificar("💖 Você reviveu!");
+}
+window.addEventListener("load", () => { renderizarSelecao(); redimensionarCanvas(); });
+</script>rParticulas(bau.x, bau.y, "#fbbf24", 30);
+  camera.shakeIntensidade = 8;
+  const ouroGanho = bau.ouroMin + Math.floor(Math.random() * (bau.ouroMax - bau.ouroMin + 1));
+  ouro += ouroGanho;
+  const itensGanhos = [];
+  for (let i = 0; i < bau.itens; i++) {
+    const roll = Math.random();
+    let item = null;
+    if (roll < bau.chanceArma) { const armas = Object.values(ARMAS).filter(a => a.tipo === "arma"); item = { ...armas[Math.floor(Math.random() * armas.length)], qtd: 1 }; }
+    else if (roll < bau.chanceArma + bau.chanceArmadura) { const armaduras = Object.values(ARMAS).filter(a => a.tipo === "armadura" || a.tipo === "elmo"); item = { ...armaduras[Math.floor(Math.random() * armaduras.length)], qtd: 1 }; }
+    else { const consumiveis = Object.values(CONSUMIVEIS); item = { ...consumiveis[Math.floor(Math.random() * consumiveis.length)], qtd: 1 }; }
+    adicionarItemInventario(item);
+    itensGanhos.push(`${item.icone} ${item.nome}`);
+  }
+  notificar(`🎁 Baú ${rar.nome} aberto! -${custo}🔑 +${ouroGanho}💰`);
+  dialogoAberto = true;
+  document.getElementById("dlg-titulo").innerHTML = `🎁 Baú ${rar.nome}`;
+  document.getElementById("dlg-texto").innerHTML = `<div style="text-align:center;"><div style="font-size:32px; margin-bottom:10px;">🎁</div><div style="color:#f87171; font-weight:900; font-size:14px;">-${custo} 🔑</div><div style="color:#fbbf24; font-weight:900; font-size:16px; margin-bottom:10px;">💰 +${ouroGanho}</div><div style="color:#34d399; font-size:13px; line-height:1.8;">${itensGanhos.map(i => `• ${i}`).join("<br>")}</div></div>`;
+  document.getElementById("dlg-acoes").innerHTML = `<button class="dlg-btn principal" onclick="fecharDialogo()">✅ Coletar</button>`;
+  document.getElementById("dialogo-overlay").classList.add("ativo");
+  atualizarHUD();
+}
+/* ====================================================
+   EFEITOS
+   ==================================================== */
+function criarParticulas(x, y, cor, qtd) {
+  for (let i = 0; i < qtd; i++) {
+    particulas.push({ x: x * TILE + TILE / 2, y: y * TILE + TILE / 2, vx: (Math.random() - 0.5) * 8, vy: (Math.random() - 0.5) * 8 - 3, vida: 30 + Math.random() * 25, cor, tamanho: 2 + Math.random() * 5, gravidade: 0.3 });
+  }
+}
+function atualizarParticulas() {
+  particulas = particulas.filter(p => p.vida > 0);
+  particulas.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += p.gravidade; p.vx *= 0.97; p.vida--; });
+}
+function criarDanoFlutuante(x, y, texto, classe) {
+  const offX = -camera.x + camera.shakeX;
+  const offY = -camera.y + camera.shakeY;
+  const el = document.createElement("div");
+  el.className = `dano-flutuante ${classe}`;
+  el.textContent = typeof texto === "number" ? `-${texto}` : texto;
+  if (classe === "dano-cura" || classe === "dano-madeira") el.textContent = texto;
+  el.style.left = (x * TILE + offX + TILE / 2) + "px";
+  el.style.top = (y * TILE + offY) + "px";
+  document.getElementById("jogo").appendChild(el);
+  setTimeout(() => el.remove(), 1300);
+}
+function atualizarCooldowns() {
+  if (!jogador) return;
+  let mudou = false;
+  jogador.cooldowns = jogador.cooldowns.map(cd => { if (cd > 0) { mudou = true; return cd - 1; } return 0; });
+  if (mudou) atualizarCooldownsVisual();
+}
+function atualizarCooldownsVisual() {
+  const h = herois[jogador.id];
+  h.habilidades.forEach((hab, i) => {
+    const el = document.getElementById(`hab-${i}`);
+    if (!el) return;
+    const cdSeg = Math.ceil(jogador.cooldowns[i] / 60);
+    if (jogador.cooldowns[i] > 0) { el.classList.add("cooldown"); el.querySelector(".hab-custo").textContent = cdSeg + "s"; }
+    else if (jogador.mp < hab.custo) { el.classList.add("travada"); el.querySelector(".hab-custo").textContent = hab.custo; }
+    else { el.classList.remove("cooldown", "travada"); el.querySelector(".hab-custo").textContent = hab.custo; }
+  });
+}
+/* ====================================================
+   HUD
+   ==================================================== */
+function renderizarHabilidades() {
+  const h = herois[jogador.id];
+  document.getElementById("hud-habilidades").innerHTML = h.habilidades.map((hab, i) => `
+    <div class="hab-slot" id="hab-${i}" onclick="usarHabilidade(${i})">
+      <div class="hab-icone">${hab.icone}</div>
+      <div class="hab-nome">${hab.nome}</div>
+      <div class="hab-custo">${hab.custo}</div>
+      <div class="hab-tecla">${i + 1}</div>
+    </div>`).join("");
+}
+function renderizarInventarioMini() {
+  const grid = document.getElementById("hud-inventario-grid");
+  document.getElementById("hud-inv-slots").textContent = `${inventario.length}/48`;
+  if (inventario.length === 0) { grid.innerHTML = '<div class="hud-inv-vazio">Vazio</div>'; return; }
+  grid.innerHTML = inventario.slice(0, 9).map(it => {
+    const rar = RARIDADES[it.raridade] || RARIDADES.comum;
+    return `<div class="hud-inv-item" style="border-color: ${rar.cor};" title="${it.nome}">${it.icone}${it.qtd > 1 ? `<span class="qtd">${it.qtd}</span>` : ''}</div>`;
+  }).join("");
+}
+function atualizarHUD() {
+  if (!jogador) return;
+  document.getElementById("hud-hp").style.width = (jogador.hp / jogador.hpMax * 100) + "%";
+  document.getElementById("hud-mp").style.width = (jogador.mp / jogador.mpMax * 100) + "%";
+  document.getElementById("hud-xp").style.width = (jogador.xp / jogador.xpMax * 100) + "%";
+  document.getElementById("hud-hp-txt").textContent = `${jogador.hp}/${jogador.hpMax}`;
+  document.getElementById("hud-mp-txt").textContent = `${jogador.mp}/${jogador.mpMax}`;
+  document.getElementById("hud-xp-txt").textContent = `${jogador.xp}/${jogador.xpMax}`;
+  document.getElementById("hud-ouro").textContent = `💰 ${ouro}`;
+  document.getElementById("hud-chaves").textContent = `🔑 ${chaves}`;
+  const elTanques = document.getElementById("hud-tanques");
+  if (elTanques) elTanques.textContent = `🏦 Tanques: ${tanquesSaqueados}`;
+  document.getElementById("hud-cap").textContent = `Nível ${jogador.nivel}`;
+  renderizarInventarioMini();
+}
+function atualizarHUDMonstro() {
+  const hud = document.getElementById("hud-monstro");
+  if (monstroFocado && monstroFocado.vivo && jogador && distancia(jogador.x, jogador.y, monstroFocado.x, monstroFocado.y) < 6) {
+    hud.classList.add("ativo");
+    document.getElementById("hud-monstro-nome").textContent = monstroFocado.nome;
+    document.getElementById("hud-monstro-fill").style.width = (monstroFocado.hpAtual / monstroFocado.hpMax * 100) + "%";
+    document.getElementById("hud-monstro-txt").textContent = `${monstroFocado.hpAtual} / ${monstroFocado.hpMax} HP`;
+  } else hud.classList.remove("ativo");
+}
+/* ====================================================
+   DESENHO PRINCIPAL
+   ==================================================== */
+function desenhar() {
+  if (!jogador) return;
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  const ni = noiteIntensidade;
+  const diaTop = [135, 206, 235], diaMid = [176, 224, 230], diaBot = [224, 244, 255];
+  const noiteTop = [5, 5, 25], noiteMid = [10, 10, 40], noiteBot = [25, 20, 60];
+  const mix = (a, b) => Math.round(a * (1 - ni) + b * ni);
+  skyGrad.addColorStop(0, `rgb(${mix(diaTop[0],noiteTop[0])},${mix(diaTop[1],noiteTop[1])},${mix(diaTop[2],noiteTop[2])})`);
+  skyGrad.addColorStop(0.5, `rgb(${mix(diaMid[0],noiteMid[0])},${mix(diaMid[1],noiteMid[1])},${mix(diaMid[2],noiteMid[2])})`);
+  skyGrad.addColorStop(1, `rgb(${mix(diaBot[0],noiteBot[0])},${mix(diaBot[1],noiteBot[1])},${mix(diaBot[2],noiteBot[2])})`);
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  if (ni > 0.5) {
+    const alphaEstrelas = (ni - 0.5) / 0.5;
+    ctx.fillStyle = "#fff";
+    for (let i = 0; i < 40; i++) {
+      const sx = ((i * 137 + animacaoFrame * 0.01) % 1) * canvas.width;
+      const sy = ((i * 89 + 37) % 1) * canvas.height * 0.5;
+      const brilho = 0.4 + Math.sin(animacaoFrame * 0.05 + i) * 0.4;
+      ctx.globalAlpha = alphaEstrelas * brilho;
+      ctx.fillRect(sx, sy, 2, 2);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  const offX = -camera.x + camera.shakeX;
+  const offY = -camera.y + camera.shakeY;
+  const sX = Math.floor(camera.x / TILE) - 1;
+  const eX = Math.ceil((camera.x + canvas.width) / TILE) + 1;
+  const sY = Math.floor(camera.y / TILE) - 1;
+  const eY = Math.ceil((camera.y + canvas.height) / TILE) + 1;
+  for (let y = sY; y < eY; y++) {
+    for (let x = sX; x < eX; x++) {
+      const tile = getTile(x, y);
+      const px = x * TILE + offX, py = y * TILE + offY;
+      if (tile === 4 || tile === 6) {
+        ctx.fillStyle = "#7bc043";
+        ctx.fillRect(px, py, TILE, TILE);
+        ctx.fillStyle = "#5fa82c";
+        const seed = (x * 7 + y * 13) % 4;
+        if (seed === 0) ctx.fillRect(px + 4, py + 8, 3, 3);
+        const hp = arvoresHP[tileKey(x, y)] !== undefined ? arvoresHP[tileKey(x, y)] : 3;
+        desenharArvore(ctx, px, py, hp);
+      } else {
+        desenharTile(tile, px, py, x, y);
+      }
+    }
+  }
+  flora.forEach(f => {
+    const px = f.x * TILE + offX, py = f.y * TILE + offY;
+    if (px < -TILE || px > canvas.width + TILE || py < -TILE || py > canvas.height + TILE) return;
+    const bob = Math.sin(animacaoFrame * 0.06 + f.x) * 1.5;
+    ctx.font = "16px serif"; ctx.textAlign = "center";
+    ctx.fillText(f.icone, px + TILE / 2, py + TILE / 2 + bob);
+  });
+  itensFlutuantes.forEach(it => {
+    const px = it.x * TILE + offX, py = it.y * TILE + offY;
+    if (px < -TILE || px > canvas.width + TILE || py < -TILE || py > canvas.height + TILE) return;
+    const bob = Math.sin(it.bob) * 5;
+    const rar = RARIDADES[it.item.raridade] || RARIDADES.comum;
+    const grad = ctx.createRadialGradient(px + TILE / 2, py + TILE / 2 + bob, 2, px + TILE / 2, py + TILE / 2 + bob, TILE);
+    grad.addColorStop(0, rar.cor + "AA");
+    grad.addColorStop(1, "transparent");
+    ctx.fillStyle = grad;
+    ctx.fillRect(px - TILE, py - TILE, TILE * 3, TILE * 3);
+    ctx.font = "24px serif"; ctx.textAlign = "center";
+    ctx.globalAlpha = it.vida < 120 ? it.vida / 120 : 1;
+    ctx.fillText(it.item.icone, px + TILE / 2, py + TILE / 2 + bob);
+    ctx.globalAlpha = 1;
+  });
+  magicos.forEach(m => {
+    if (!m.vivo) return;
+    const px = m.x * TILE + offX, py = m.y * TILE + offY;
+    if (px < -TILE * 2 || px > canvas.width + TILE * 2 || py < -TILE * 2 || py > canvas.height + TILE * 2) return;
+    let corAura = "rgba(220,38,38,0.35)";
+    if (m.tipo === "goblin") corAura = m.noturno ? "rgba(139,92,246,0.5)" : "rgba(34,197,94,0.35)";
+    const grad = ctx.createRadialGradient(px + TILE / 2, py + TILE / 2, 2, px + TILE / 2, py + TILE / 2, TILE * 1.6);
+    grad.addColorStop(0, corAura);
+    grad.addColorStop(1, "transparent");
+    ctx.fillStyle = grad;
+    ctx.fillRect(px - TILE * 2.4, py - TILE * 2.4, TILE * 6.4, TILE * 6.4);
+    const dir = (jogador.x < m.x) ? "left" : "right";
+    desenharMonstro(ctx, px + TILE / 2, py + TILE / 2 + 4, 36, m.tipo, { direcao: dir, andando: m.estadoIA === "persegue", frameAnimacao: animacaoFrame, flash: m.hitFlash > 0 });
+    const pct = m.hpAtual / m.hpMax;
+    ctx.fillStyle = "rgba(0,0,0,0.85)";
+    ctx.fillRect(px + 2, py - 8, TILE - 4, 6);
+    ctx.fillStyle = pct > 0.5 ? "#dc2626" : pct > 0.25 ? "#f59e0b" : "#7f1d1d";
+    ctx.fillRect(px + 2, py - 8, (TILE - 4) * pct, 6);
+    if (m.estadoIA === "persegue") {
+      const bob = Math.sin(animacaoFrame * 0.3) * 4;
+      ctx.font = "bold 18px sans-serif"; ctx.fillStyle = "#dc2626"; ctx.textAlign = "center";
+      ctx.fillText("!", px + TILE / 2, py - 14 + bob);
+    }
+    if (m.noturno) { ctx.font = "bold 12px sans-serif"; ctx.fillStyle = "#a78bfa"; ctx.textAlign = "center"; ctx.fillText("🌙", px + TILE / 2, py - 20); }
+    if (m.surpresa) { ctx.font = "bold 14px sans-serif"; ctx.fillStyle = "#ef4444"; ctx.textAlign = "center"; const pulse = Math.sin(animacaoFrame * 0.3) * 2; ctx.fillText("⚠️", px + TILE / 2, py - 26 + pulse); }
+  });
+  tanques.forEach(t => {
+    const px = t.x * TILE + offX, py = t.y * TILE + offY;
+    if (px < -TILE * 2 || px > canvas.width + TILE * 2 || py < -TILE * 2 || py > canvas.height + TILE * 2) return;
+    const bob = Math.sin(animacaoFrame * 0.1 + t.bob) * 1.5;
+    if (!t.saqueado) {
+      const grad = ctx.createRadialGradient(px + TILE / 2, py + TILE / 2, 2, px + TILE / 2, py + TILE / 2, TILE * 1.6);
+      grad.addColorStop(0, t.cor + "55");
+      grad.addColorStop(1, "transparent");
+      ctx.fillStyle = grad;
+      ctx.fillRect(px - TILE * 2, py - TILE * 2, TILE * 5, TILE * 5);
+    }
+    ctx.fillStyle = "rgba(0,0,0,0.45)";
+    ctx.beginPath(); ctx.ellipse(px + TILE / 2, py + TILE - 3, TILE * 0.42, TILE * 0.14, 0, 0, Math.PI * 2); ctx.fill();
+    const corBase = t.saqueado ? "#3a3a3a" : "#5c4030";
+    ctx.fillStyle = corBase;
+    ctx.fillRect(px + 5, py + 10 + bob, TILE - 10, TILE - 14);
+    ctx.fillStyle = t.saqueado ? "#2a2a2a" : t.cor;
+    ctx.beginPath(); ctx.ellipse(px + TILE / 2, py + 10 + bob, (TILE - 10) / 2, 4, 0, 0, Math.PI * 2); ctx.fill();
+    if (!t.saqueado) {
+      const ico = t.conteudo.tipo === "ouro" ? "💰" : t.conteudo.tipo === "madeira" ? "🪵" : t.conteudo.tipo === "chave" ? "🔑" : "🧪";
+      ctx.font = "bold 14px serif"; ctx.textAlign = "center";
+      const pulse = Math.sin(animacaoFrame * 0.15 + t.bob) * 1.5;
+      ctx.fillText(ico, px + TILE / 2, py + 22 + bob + pulse);
+      const dist = distancia(jogador.x, jogador.y, t.x, t.y);
+      if (dist < 1.8) { const pulse2 = Math.sin(animacaoFrame * 0.2) * 3; ctx.font = "bold 14px 'Arial Black', sans-serif"; ctx.fillStyle = "#22d3ee"; ctx.strokeStyle = "#000"; ctx.lineWidth = 3; ctx.textAlign = "center"; ctx.strokeText("E", px + TILE / 2, py - 6 + bob + pulse2); ctx.fillText("E", px + TILE / 2, py - 6 + bob + pulse2); }
+    } else { ctx.font = "bold 14px serif"; ctx.textAlign = "center"; ctx.fillStyle = "#4b5563"; ctx.fillText("✖", px + TILE / 2, py + 22 + bob); }
+  });
+  baus.forEach(b => {
+    const px = b.x * TILE + offX, py = b.y * TILE + offY;
+    if (px < -TILE * 2 || px > canvas.width + TILE * 2 || py < -TILE * 2 || py > canvas.height + TILE * 2) return;
+    const rar = RARIDADES[b.raridade] || RARIDADES.comum;
+    const bob = Math.sin(animacaoFrame * 0.08 + b.bob) * 2;
+    if (!b.aberto) {
+      const grad = ctx.createRadialGradient(px + TILE / 2, py + TILE / 2, 2, px + TILE / 2, py + TILE / 2, TILE * 1.8);
+      grad.addColorStop(0, rar.cor + "55");
+      grad.addColorStop(1, "transparent");
+      ctx.fillStyle = grad;
+      ctx.fillRect(px - TILE * 2, py - TILE * 2, TILE * 5, TILE * 5);
+    }
+    ctx.fillStyle = "rgba(0,0,0,0.4)";
+    ctx.beginPath(); ctx.ellipse(px + TILE / 2, py + TILE - 4, TILE * 0.38, TILE * 0.12, 0, 0, Math.PI * 2); ctx.fill();
+    const corBase = b.aberto ? "#5a4a2a" : "#8b6d3a";
+    const corDetalhe = b.aberto ? "#3a2e18" : "#6b4f22";
+    const corMetal = b.aberto ? "#7a6a3a" : rar.cor;
+    ctx.fillStyle = corBase;
+    ctx.fillRect(px + 6, py + 12 + bob, TILE - 12, TILE - 18);
+    ctx.fillStyle = corDetalhe;
+    ctx.fillRect(px + 8, py + 16 + bob, TILE - 16, 2);
+    ctx.fillRect(px + 8, py + 22 + bob, TILE - 16, 2);
+    ctx.fillStyle = corDetalhe;
+    if (b.aberto) { ctx.fillRect(px + 5, py + 4 + bob, TILE - 10, 8); ctx.fillStyle = "#1a1005"; ctx.fillRect(px + 8, py + 12 + bob, TILE - 16, 4); }
+    else ctx.fillRect(px + 6, py + 6 + bob, TILE - 12, 8);
+    ctx.fillStyle = corMetal;
+    ctx.fillRect(px + 6, py + 10 + bob, TILE - 12, 3);
+    ctx.fillRect(px + TILE / 2 - 2, py + 6 + bob, 4, TILE - 10);
+    if (!b.aberto) {
+      ctx.fillStyle = "#fbbf24";
+      ctx.beginPath(); ctx.arc(px + TILE / 2, py + 14 + bob, 3, 0, Math.PI * 2); ctx.fill();
+      const dist = distancia(jogador.x, jogador.y, b.x, b.y);
+      const custo = CHAVES_POR_BAU[b.raridade] || 1;
+      const podeAbrir = chaves >= custo;
+      ctx.font = "bold 11px 'Arial Black', sans-serif";
+      ctx.fillStyle = podeAbrir ? "#fbbf24" : "#f87171";
+      ctx.strokeStyle = "#000"; ctx.lineWidth = 3; ctx.textAlign = "center";
+      ctx.strokeText(`🔑${custo}`, px + TILE / 2, py - 10 + bob);
+      ctx.fillText(`🔑${custo}`, px + TILE / 2, py - 10 + bob);
+      if (dist < 1.8) {
+        const pulse = Math.sin(animacaoFrame * 0.2) * 3;
+        ctx.font = "bold 14px 'Arial Black', sans-serif";
+        ctx.fillStyle = podeAbrir ? "#34d399" : "#f87171";
+        const txt = podeAbrir ? "E" : "🔒";
+        ctx.strokeText(txt, px + TILE / 2, py + 4 + bob + pulse);
+        ctx.fillText(txt, px + TILE / 2, py + 4 + bob + pulse);
+      }
+    }
+  });
+  npcs.forEach(n => {
+    const px = n.x * TILE + offX, py = n.y * TILE + offY;
+    if (px < -TILE * 2 || px > canvas.width + TILE * 2 || py < -TILE * 2 || py > canvas.height + TILE * 2) return;
+    ctx.fillStyle = "#c9a380"; ctx.fillRect(px + 8, py + 6, 16, 20);
+    ctx.fillStyle = "#374151"; ctx.fillRect(px + 6, py + 22, 20, 8);
+    ctx.fillStyle = "#3f2a15"; ctx.fillRect(px + 8, py + 2, 16, 6);
+    ctx.font = "bold 15px sans-serif"; ctx.fillStyle = "#fbbf24";
+    const bob = Math.sin(animacaoFrame * 0.15) * 3;
+    ctx.textAlign = "center"; ctx.fillText("!", px + TILE / 2, py - 8 + bob);
+  });
+  const pjx = jogador.x * TILE + offX + TILE / 2;
+  const pjy = jogador.y * TILE + offY + TILE / 2;
+  const gradJ = ctx.createRadialGradient(pjx, pjy, 2, pjx, pjy, TILE * 1.4);
+  gradJ.addColorStop(0, jogador.corGlow);
+  gradJ.addColorStop(1, "transparent");
+  ctx.fillStyle = gradJ;
+  ctx.fillRect(pjx - TILE * 2, pjy - TILE * 2, TILE * 4, TILE * 4);
+  desenharPersonagem(ctx, pjx, pjy + 4, 34, jogador.aparencia, { direcao: direcaoJogador, atacando: jogador.emAtaque > 0, andando: andando, frameAnimacao: animacaoFrame, flash: jogador.hitFlash > 0 }, equipamento.arma);
+  if (jogador.invulneravel > 0) {
+    ctx.strokeStyle = `rgba(255,255,255,${Math.sin(animacaoFrame * 0.3) * 0.5 + 0.5})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(pjx, pjy, TILE * 0.9, 0, Math.PI * 2); ctx.stroke();
+  }
+  particulas.forEach(p => {
+    ctx.globalAlpha = p.vida / 55;
+    ctx.fillStyle = p.cor;
+    ctx.fillRect(p.x + offX - p.tamanho / 2, p.y + offY - p.tamanho / 2, p.tamanho, p.tamanho);
+  });
+  ctx.globalAlpha = 1;
+
+  if (noiteIntensidade > 0.05) {
+    ctx.fillStyle = `rgba(10, 15, 40, ${noiteIntensidade * 0.55})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const luzRaio = TILE * 4.5;
+    const gradLuz = ctx.createRadialGradient(pjx, pjy, 10, pjx, pjy, luzRaio);
+    gradLuz.addColorStop(0, `rgba(255,220,150,${0.35 * noiteIntensidade})`);
+    gradLuz.addColorStop(0.6, `rgba(255,180,80,${0.12 * noiteIntensidade})`);
+    gradLuz.addColorStop(1, "transparent");
+    ctx.globalCompositeOperation = "lighter";
+    ctx.fillStyle = gradLuz;
+    ctx.fillRect(pjx - luzRaio, pjy - luzRaio, luzRaio * 2, luzRaio * 2);
+    ctx.globalCompositeOperation = "source-over";
+  }
+  const vin = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, canvas.height * 0.5, canvas.width / 2, canvas.height / 2, canvas.height);
+  vin.addColorStop(0, "transparent");
+  vin.addColorStop(1, `rgba(0,0,0,${0.35 + noiteIntensidade * 0.3})`);
+  ctx.fillStyle = vin;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+function desenharTile(tile, x, y, mapX, mapY) {
+  if (tile === 0) {
+    ctx.fillStyle = "#7bc043"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#5fa82c";
+    const seed = (mapX * 7 + mapY * 13) % 4;
+    if (seed === 0) ctx.fillRect(x + 4, y + 8, 3, 3);
+    else if (seed === 1) ctx.fillRect(x + 18, y + 12, 2, 2);
+    else if (seed === 2) ctx.fillRect(x + 10, y + 22, 3, 2);
+  } else if (tile === 1) {
+    ctx.fillStyle = "#4ba3d4"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#7dc4ea";
+    const onda = Math.sin(animacaoFrame * 0.05 + mapX * 0.1) * 3;
+    ctx.fillRect(x + 4, y + 10 + onda, TILE - 8, 2);
+  } else if (tile === 2) {
+    ctx.fillStyle = "#8b6d47"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#a88a5f"; ctx.fillRect(x + 2, y + 2, 12, 12); ctx.fillRect(x + 18, y + 16, 10, 10);
+  } else if (tile === 3) {
+    ctx.fillStyle = "#d4c48a"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#e8d9a0"; ctx.fillRect(x + 8, y + 12, 3, 3);
+  } else if (tile === 5) {
+    ctx.fillStyle = "#7bc043"; ctx.fillRect(x, y, TILE, TILE);
+    ctx.fillStyle = "#5fa82c";
+    const seed = (mapX * 7 + mapY * 13) % 4;
+    if (seed === 0) ctx.fillRect(x + 4, y + 8, 3, 3);
+    ctx.fillStyle = "rgba(0,0,0,0.4)";
+    ctx.beginPath(); ctx.ellipse(x + TILE / 2, y + TILE - 3, TILE * 0.4, TILE * 0.15, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#8b4513"; ctx.fillRect(x + 12, y + 20, 8, 10);
+  }
+}
+function desenharMinimapa() {
+  if (!jogador) return;
+  minimapaCtx.fillStyle = "rgba(0,0,0,0.95)";
+  minimapaCtx.fillRect(0, 0, 220, 165);
+  const janelaL = 30, janelaA = 22;
+  const escalaX = 220 / janelaL, escalaY = 165 / janelaA;
+  const baseX = Math.floor(jogador.x) - Math.floor(janelaL / 2);
+  const baseY = Math.floor(jogador.y) - Math.floor(janelaA / 2);
+  for (let y = 0; y < janelaA; y++) {
+    for (let x = 0; x < janelaL; x++) {
+      const tile = getTile(baseX + x, baseY + y);
+      if (tile === 1) minimapaCtx.fillStyle = "#3b82f6";
+      else if (tile === 4 || tile === 6) minimapaCtx.fillStyle = "#166534";
+      else if (tile === 3) minimapaCtx.fillStyle = "#d4c48a";
+      else if (tile === 5) minimapaCtx.fillStyle = "#8b6d47";
+      else minimapaCtx.fillStyle = "#5da82a";
+      minimapaCtx.fillRect(x * escalaX, y * escalaY, Math.ceil(escalaX), Math.ceil(escalaY));
+    }
+  }
+  const paraMini = (wx, wy) => ({ mx: (wx - baseX) * escalaX, my: (wy - baseY) * escalaY });
+  magicos.forEach(m => {
+    if (!m.vivo) return;
+    const p = paraMini(m.x, m.y);
+    if (p.mx < -4 || p.mx > 224 || p.my < -4 || p.my > 169) return;
+    minimapaCtx.fillStyle = m.noturno ? "#a78bfa" : m.surpresa ? "#f97316" : "#dc2626";
+    minimapaCtx.fillRect(p.mx - 1, p.my - 1, 3, 3);
+  });
+  baus.forEach(b => {
+    if (b.aberto) return;
+    const p = paraMini(b.x, b.y);
+    if (p.mx < -4 || p.mx > 224 || p.my < -4 || p.my > 169) return;
+    const rar = RARIDADES[b.raridade] || RARIDADES.comum;
+    minimapaCtx.fillStyle = rar.cor;
+    minimapaCtx.fillRect(p.mx - 2, p.my - 2, 4, 4);
+  });
+  tanques.forEach(t => {
+    if (t.saqueado) return;
+    const p = paraMini(t.x, t.y);
+    if (p.mx < -4 || p.mx > 224 || p.my < -4 || p.my > 169) return;
+    minimapaCtx.fillStyle = "#06b6d4";
+    minimapaCtx.fillRect(p.mx - 2, p.my - 2, 4, 4);
+  });
+  minimapaCtx.fillStyle = jogador.cor;
+  minimapaCtx.beginPath();
+  minimapaCtx.arc(Math.floor(janelaL / 2) * escalaX, Math.floor(janelaA / 2) * escalaY, 4, 0, Math.PI * 2);
+  minimapaCtx.fill();
+  minimapaCtx.strokeStyle = "#fff"; minimapaCtx.lineWidth = 1.5; minimapaCtx.stroke();
+}
+/* ====================================================
+   UTILITÁRIOS
+   ==================================================== */
+function distancia(x1, y1, x2, y2) { return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2); }
+let notifTimer = null;
+function notificar(msg) {
+  const el = document.getElementById("notificacao");
+  el.textContent = msg;
+  el.classList.add("ativa");
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(() => el.classList.remove("ativa"), 2200);
+}
+/* ====================================================
+   PAUSE / MORTE
+   ==================================================== */
+function abrirPause() { jogoPausado = true; document.getElementById("pause-overlay").classList.add("ativo"); }
+function fecharPause() { jogoPausado = false; document.getElementById("pause-overlay").classList.remove("ativo"); }
+function salvarJogo() { notificar("💾 Jogo salvo!"); }
+function morrer() {
+  dialogoAberto = true;
+  document.getElementById("dlg-titulo").innerHTML = "💀 Você Morreu";
+  document.getElementById("dlg-texto").textContent = "As criaturas consumiram sua alma...";
+  document.getElementById("dlg-acoes").innerHTML = `<button class="dlg-btn principal" onclick="reviver()">💖 Reviver</button><button class="dlg-btn perigo" onclick="voltarAoMenu()">🚪 Menu</button>`;
+  document.getElementById("dialogo-overlay").classList.add("ativo");
+}
+function reviver() {
+  jogador.hp = jogador.hpMax;
+  jogador.mp = jogador.mpMax;
+  jogador.x = 20; jogador.y = 20;
+  jogador.invulneravel = 240;
+  fecharDialogo();
+  atualizarHUD();
+  notificar("💖 Você reviveu!");
+}
+window.addEventListener("load", () => { renderizarSelecao(); redimensionarCanvas(); });
